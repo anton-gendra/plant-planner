@@ -1,1 +1,1 @@
-# plant-plannet
+# Plant Planner
