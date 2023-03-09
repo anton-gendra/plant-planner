@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Plantplanner"
         tools:targetApi="31">
         <activity
+            android:name=".SearchFriends"
+            android:exported="false" />
+        <activity
             android:name=".Profile"
             android:exported="false" />
         <activity
