@@ -38,6 +38,7 @@ tools:context=".SearchPlant">
             android:layout_marginLeft="24dp"
             android:layout_marginTop="4dp"
             android:text="Lophophora"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageButton7"
             app:layout_constraintTop_toTopOf="@+id/imageButton7" />
 
@@ -72,32 +73,39 @@ tools:context=".SearchPlant">
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="Schlumbergera truncata plant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/ic_launcher"
             tools:layout_conversion_absoluteHeight="58dp"
-            tools:layout_conversion_absoluteWidth="121dp"
-            android:contentDescription="Schlumbergera truncata plant" />
+            tools:layout_conversion_absoluteWidth="121dp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
             android:text="Schlumbergera truncata"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_conversion_absoluteWidth="58dp"
-            tools:layout_editor_absoluteX="172dp"
-            tools:layout_editor_absoluteY="16dp" />
+            tools:layout_conversion_absoluteWidth="58dp" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="16dp"
             android:text="Hanging cactus"
+            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_conversion_absoluteWidth="58dp"
-            tools:layout_editor_absoluteX="172dp"
-            tools:layout_editor_absoluteY="51dp" />
+            tools:layout_conversion_absoluteWidth="58dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -189,12 +197,13 @@ tools:context=".SearchPlant">
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
             android:text="Echeveria elegans"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageButton2"
+            app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_conversion_absoluteWidth="58dp"
-            tools:layout_editor_absoluteY="16dp" />
+            tools:layout_conversion_absoluteWidth="58dp" />
 
         <TextView
             android:id="@+id/textView8"

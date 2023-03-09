@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Plantplanner"
         tools:targetApi="31">
         <activity
+            android:name=".PlantAtributtes"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory"
+            android:exported="false" />
+        <activity
+            android:name=".MapPicker"
+            android:exported="false" />
+        <activity
             android:name=".SearchPlant"
             android:exported="false" />
         <activity
