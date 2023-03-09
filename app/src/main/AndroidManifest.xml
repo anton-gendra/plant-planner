@@ -18,6 +18,15 @@
             android:name=".Profile"
             android:exported="false" />
         <activity
+            android:name=".Post"
+            android:exported="false" />
+        <activity
+            android:name=".Social"
+            android:exported="false" />
+        <activity
+            android:name=".Calendar"
+            android:exported="false" />
+        <activity
             android:name=".Settings"
             android:exported="false" />
         <activity
