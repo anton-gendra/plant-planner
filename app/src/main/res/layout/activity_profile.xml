@@ -94,6 +94,13 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/access_settings_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:textSize="10dp"
+            android:text="Settings" />
 
 
         <view class="androidx.appcompat.app.AlertController$RecycleListView"
