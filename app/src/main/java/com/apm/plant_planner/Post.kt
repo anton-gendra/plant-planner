@@ -11,8 +11,8 @@ class Post : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
 
-        val registerBtn: Button = findViewById(R.id.button6)
-        registerBtn.setOnClickListener {
+        val postBtn: Button = findViewById(R.id.button6)
+        postBtn.setOnClickListener {
             Toast.makeText(this, "Post created", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, Social::class.java))
         }
