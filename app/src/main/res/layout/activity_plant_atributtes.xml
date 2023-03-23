@@ -20,7 +20,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
     <Button
-        android:id="@+id/register_btn"
+        android:id="@+id/discard_btn"
         android:layout_width="112dp"
         android:layout_height="51dp"
         android:layout_marginStart="48dp"
