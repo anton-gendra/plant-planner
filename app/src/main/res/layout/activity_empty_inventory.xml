@@ -95,17 +95,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <SearchView
+    <Button
         android:id="@+id/searchView"
-        android:layout_width="300sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="Search plant type"
+        android:onClick="searchPlant"
+        android:text="Search plant type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="openCamera"
+        android:text="Camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -114,15 +125,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="412dp"
+        android:layout_height="75dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="99dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:text="Login"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
@@ -20,7 +44,7 @@
         android:text="@string/user_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -43,65 +67,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:background="@drawable/button_rounded"
+        android:onClick="logIn"
         android:text="@string/log_in_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        android:background="@drawable/button_rounded" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:background="@drawable/button_rounded"
+        android:onClick="register"
         android:text="@string/email_register_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        android:background="@drawable/button_rounded" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:background="@drawable/button_rounded"
+        android:drawableLeft="@drawable/google__g__logo"
+        android:onClick="logInGoogle"
         android:text="@string/google_log_in_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
-        android:background="@drawable/button_rounded"
-        android:drawableLeft="@drawable/google__g__logo"/>
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:background="@drawable/button_rounded"
+        android:drawableLeft="@drawable/twitter_bird_logo_2012"
+        android:onClick="logInTwitter"
         android:text="@string/twitter_log_in_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        android:background="@drawable/button_rounded"
-        android:drawableLeft="@drawable/twitter_bird_logo_2012"/>
+        app:layout_constraintTop_toBottomOf="@+id/register_btn" />
 
     <View
         android:id="@+id/view"
