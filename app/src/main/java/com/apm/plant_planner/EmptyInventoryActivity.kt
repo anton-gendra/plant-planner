@@ -35,7 +35,7 @@ class EmptyInventoryActivity : AppCompatActivity() {
     }
 
     fun profile(view: View) {
-        Toast.makeText(applicationContext, "DEBUG: Calendar.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "DEBUG: Profile.", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, Profile::class.java))
     }
 }

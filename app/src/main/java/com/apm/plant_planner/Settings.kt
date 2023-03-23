@@ -2,6 +2,7 @@ package com.apm.plant_planner
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 
@@ -15,8 +16,13 @@ class Settings : AppCompatActivity() {
             if (switchDarkMode.isChecked) {
                 Toast.makeText(this, "Dark mode activated", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Dark mode activated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Dark mode deactivated", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val closeSessionBtn: Button = findViewById(R.id.close_session_btn)
+        closeSessionBtn.setOnClickListener {
+            Toast.makeText(this, "Session closed", Toast.LENGTH_SHORT).show()
         }
     }
 }
