@@ -21,24 +21,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun register(view: View) {
-        Toast.makeText(applicationContext, "DEBUG: Register.", Toast.LENGTH_SHORT)
+        Toast.makeText(applicationContext, "DEBUG: Register.", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     fun logIn(view: View) {
         // Actualmente se usar un val y no se mete directamente porque luego habra mas datos
         // de inicio de sesion
-        Toast.makeText(applicationContext, "Successfully log in.", Toast.LENGTH_SHORT)
+        Toast.makeText(applicationContext, "Successfully log in.", Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, EmptyInventoryActivity::class.java)
         startActivity(intent)
     }
 
     fun logInTwitter(view: View) {
-        Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT)
+        Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT).show()
     }
 
     fun logInGoogle(view: View) {
-        Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT)
+        Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT).show()
     }
 }
