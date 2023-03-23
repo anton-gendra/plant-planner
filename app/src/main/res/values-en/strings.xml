@@ -2,7 +2,7 @@
     <string name="app_name">Plant-planner</string>
     <string name="user_label">User</string>
     <string name="password_label">Password</string>
-    <string name="log_in_label">Repeat password</string>
+    <string name="log_in_label">Log in</string>
     <string name="email_register_label">Register with Email</string>
     <string name="twitter_log_in_label">Login with twitter</string>
     <string name="google_log_in_label">Login with google</string>
