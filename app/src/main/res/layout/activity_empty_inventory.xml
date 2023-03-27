@@ -22,7 +22,7 @@
         android:layout_width="99dp"
         android:layout_height="35dp"
         android:layout_marginTop="24dp"
-        android:text="Inventory"
+        android:text="@string/inventory"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/searchView2"
@@ -47,7 +47,7 @@
         android:layout_marginTop="32dp"
         android:scaleX="2"
         android:scaleY="2"
-        android:text="Your inventory is empty!"
+        android:text="@string/inventory_empty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -96,14 +96,12 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
-        android:text="Start by adding a plant, either by \n choosing it from a list or by using \n camera detection"
+        android:layout_marginEnd="84dp"
+        android:text="@string/start_inventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -115,7 +113,7 @@
         android:layout_marginTop="8dp"
         android:iconifiedByDefault="false"
         android:onClick="searchPlant"
-        android:text="Search plant type"
+        android:text="@string/search_plant_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -126,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="openCamera"
-        android:text="Camera"
+        android:text="@string/camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4" />
@@ -145,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="calendar"
-        android:text="Calendar"
+        android:text="@string/calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view5" />
@@ -156,7 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="social"
-        android:text="Social"
+        android:text="@string/social"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
@@ -167,7 +165,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="profile"
-        android:text="Profile"
+        android:text="@string/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8" />

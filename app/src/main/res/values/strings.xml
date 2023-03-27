@@ -11,4 +11,12 @@
     <string name="repeat_password_label">Repitir contraseña</string>
     <string name="accept_terms_label">He leído y acepto las políticas de privacidad.</string>
     <string name="register_label">Registrarse</string>
+    <string name="inventory">Inventario</string>
+    <string name="inventory_empty">Tu inventario está vacio!</string>
+    <string name="start_inventory">Comienza añadiendo una planta, bien buscándola en una lista o mediante la cámara de tu móvil.</string>
+    <string name="search_plant_type">Buscar planta</string>
+    <string name="camera">Cámara</string>
+    <string name="calendar">Calendario</string>
+    <string name="social">Social</string>
+    <string name="profile">Perfil</string>
 </resources>

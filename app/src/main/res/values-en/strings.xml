@@ -11,4 +11,12 @@
     <string name="repeat_password_label">Repeat password</string>
     <string name="accept_terms_label">I have read and accept the Privacy Policy.</string>
     <string name="register_label">Register</string>
+    <string name="inventory">Inventory</string>
+    <string name="inventory_empty">Your inventory is empty!</string>
+    <string name="start_inventory">Start adding a plant, either by searching for it in a list or using your phone\'s camera.</string>
+    <string name="search_plant_type">Search for plant</string>
+    <string name="camera">Camera</string>
+    <string name="calendar">Calendar</string>
+    <string name="social">Social</string>
+    <string name="profile">Profile</string>
 </resources>
