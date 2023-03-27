@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">Plant-planner</string>
-    <string name="user_label">User</string>
-    <string name="password_label">Password</string>
-    <string name="log_in_label">Log in</string>
-    <string name="email_register_label">Register with Email</string>
-    <string name="twitter_log_in_label">Login with twitter</string>
-    <string name="google_log_in_label">Login with google</string>
-    <string name="name_label">Name</string>
+    <string name="app_name">Plant Planner</string>
+    <string name="user_label">Usuario</string>
+    <string name="password_label">Contraseña</string>
+    <string name="log_in_label">Iniciar sesión</string>
+    <string name="email_register_label">Registrarse vía Email</string>
+    <string name="twitter_log_in_label">Iniciar sesión con twitter</string>
+    <string name="google_log_in_label">Iniciar sesión con google</string>
+    <string name="name_label">Nombre</string>
     <string name="email_label">Email</string>
-    <string name="repeat_password_label">Repeat password</string>
-    <string name="accept_terms_label">I have read and accept the Privacy Policy.</string>
-    <string name="register_label">Register</string>
+    <string name="repeat_password_label">Repitir contraseña</string>
+    <string name="accept_terms_label">He leído y acepto las políticas de privacidad.</string>
+    <string name="register_label">Registrarse</string>
 </resources>
