@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgres-db:
+
+    image: postgres:latest
+
+    ports:
+      - 15000:5432
+
+    environment:
+      POSTGRES_PASSWORD: plant_pwd
+      POSTGRES_USER: plant_user
+      POSTGRES_DB: plant_db
+
+
+  plant-planner-backend:
+
+    build: .
+
+    ports: 
+      - 14000:8000
+
+    environment:
+      PYTHONPATH: /app/
+      DB_NAME: plant_db
+      DB_USER: plant_user
+      DB_PASSWORD: plant_pwd
+      DB_HOST: postgres-db
+      DB_PORT: 15000
+    
+    links:
+      - postgres-db

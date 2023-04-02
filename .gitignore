@@ -27,3 +27,13 @@ hs_err_pid*
 .idea
 .gradle
 local.properties
+
+
+# VSCode
+*.code-workspace
+launch.json
+
+# Python
+__pycache__/
+env/
+venv/
