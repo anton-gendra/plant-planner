@@ -27,7 +27,7 @@ services:
       DB_USER: plant_user
       DB_PASSWORD: plant_pwd
       DB_HOST: postgres-db
-      DB_PORT: 15000
+      DB_PORT: 5432
     
     links:
       - postgres-db
