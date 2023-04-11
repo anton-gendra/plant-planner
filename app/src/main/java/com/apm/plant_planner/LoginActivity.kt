@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         // de inicio de sesion
         Toast.makeText(applicationContext, "Successfully log in.", Toast.LENGTH_SHORT).show()
 
-        val intent = Intent(this, EmptyInventoryActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
