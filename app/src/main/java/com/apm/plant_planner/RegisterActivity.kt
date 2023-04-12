@@ -15,7 +15,7 @@ class RegisterActivity : AppCompatActivity() {
     fun register(view: View) {
         Toast.makeText(applicationContext, "Successfully registered.", Toast.LENGTH_SHORT).show()
 
-        val intent = Intent(this, EmptyInventoryActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 }

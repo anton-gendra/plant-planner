@@ -14,7 +14,9 @@ class Post : AppCompatActivity() {
         val postBtn: Button = findViewById(R.id.button6)
         postBtn.setOnClickListener {
             Toast.makeText(this, "Post created", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, Social::class.java))
+            // TODO: comento aqui ya que esa actividad ya no existe, es un fragment
+            //  (lo mismo pasara con esta)
+            //startActivity(Intent(this, Social::class.java))
         }
     }
 }

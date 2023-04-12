@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.apm.plant_planner.ui.CalendarFragment
 import com.apm.plant_planner.ui.EmptyInventoryFragment
+import com.apm.plant_planner.ui.SocialFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(navListener)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+        supportFragmentManager.beginTransaction().replace(R.id.navHostFragment,
             EmptyInventoryFragment()).commit()
     }
 
@@ -31,8 +32,17 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "DEBUG: Calendar.", Toast.LENGTH_SHORT).show()
                 selectedFragment = CalendarFragment()
             }
+            R.id.page_camera -> {
+                Toast.makeText(applicationContext, "Camera not implemented yet.", Toast.LENGTH_SHORT).show()
+            }
+            R.id.page_social -> {
+                selectedFragment = SocialFragment()
+            }
+            R.id.page_camera -> {
+                Toast.makeText(applicationContext, "Profile not implemented yet.", Toast.LENGTH_SHORT).show()
+            }
         }
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.navHostFragment, selectedFragment).commit()
         true
     }
 }
