@@ -6,7 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.apm.plant_planner.Post
 import com.apm.plant_planner.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +30,13 @@ class SocialFragment : Fragment() {
             Log.d("btnSetup", "Selected")
             view.context.startActivity(Intent(view.context, Post::class.java))
 
+        }
+
+        val searchFriendsBtn: Button = view.findViewById(R.id.add_user_btn)
+        searchFriendsBtn.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.navHostFragment, SearchFriendsFragment())
+            transaction.commit()
         }
 
         return view;
