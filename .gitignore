@@ -37,3 +37,4 @@ launch.json
 __pycache__/
 env/
 venv/
+local.properties
