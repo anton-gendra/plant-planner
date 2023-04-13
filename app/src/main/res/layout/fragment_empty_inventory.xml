@@ -69,7 +69,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:iconifiedByDefault="false"
-            android:onClick="searchPlant"
             android:text="@string/search_plant_type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
