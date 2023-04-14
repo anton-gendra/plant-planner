@@ -1,11 +1,15 @@
 package com.apm.plant_planner.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +38,29 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        val cardButton: ConstraintLayout = view.findViewById(R.id.card_view)
+        cardButton.setOnClickListener {
+            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+            startActivity(intent)
+        }
+        val cardButton2: ConstraintLayout = view.findViewById(R.id.card_view2)
+        cardButton2.setOnClickListener {
+            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+            startActivity(intent)
+        }
+        val cardButton3: ConstraintLayout = view.findViewById(R.id.card_view3)
+        cardButton3.setOnClickListener {
+            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+            startActivity(intent)
+        }
+        val cardButton4: ConstraintLayout = view.findViewById(R.id.card_view4)
+        cardButton4.setOnClickListener {
+            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+            startActivity(intent)
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return view
     }
 
     companion object {
