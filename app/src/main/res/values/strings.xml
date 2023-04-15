@@ -8,7 +8,7 @@
     <string name="google_log_in_label">Iniciar sesión con google</string>
     <string name="name_label">Nombre</string>
     <string name="email_label">Email</string>
-    <string name="repeat_password_label">Repitir contraseña</string>
+    <string name="repeat_password_label">Repetir contraseña</string>
     <string name="accept_terms_label">He leído y acepto las políticas de privacidad.</string>
     <string name="register_label">Registrarse</string>
     <string name="inventory">Inventario</string>
@@ -19,4 +19,5 @@
     <string name="calendar">Calendario</string>
     <string name="social">Social</string>
     <string name="profile">Perfil</string>
+    <string name="search_friends">Amigos</string>
 </resources>
