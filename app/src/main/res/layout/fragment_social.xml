@@ -10,26 +10,13 @@
         android:id="@+id/toolbar"
         android:layout_width="412dp"
         android:layout_height="75dp"
-        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="99dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="24dp"
-        android:text="Social"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/searchView2"
-        app:layout_constraintHorizontal_bias="0.375"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+    
 
     <SearchView
         android:id="@+id/searchView2"
@@ -47,8 +34,7 @@
         android:layout_height="41dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="14sp"
-        android:text="Friends"
-        app:backgroundTint="#000000"
+        android:text="@string/search_friends"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.783"
@@ -76,13 +62,12 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <TextView
+        android:id="@+id/textPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20sp"
         android:text="Marina Yers"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
@@ -150,7 +135,7 @@
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         android:layout_marginBottom="188dp"
-        android:background="#C6BEBE"
+        android:background="@color/blue_green_darker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -162,9 +147,10 @@
         android:id="@+id/view3"
         android:layout_width="303dp"
         android:layout_height="48dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
-        android:background="#C6BEBE"
+        android:background="@color/blue_green_3"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -178,7 +164,6 @@
         android:layout_height="48dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
-        android:background="#C6BEBE"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -238,6 +223,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
+        android:backgroundTint="?attr/colorPrimary"
         android:clickable="true"
         android:contentDescription="Enter to add new post"
         app:layout_constraintBottom_toBottomOf="@+id/searchView2"
