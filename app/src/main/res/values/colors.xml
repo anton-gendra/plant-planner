@@ -7,11 +7,19 @@
 
 
 
-    <color name="ice">#8CE6CC</color>
+<!--    <color name="ice">#8CE6CC</color>-->
+<!--    <color name="blue_green_light">#16CC98</color>-->
+<!--    <color name="blue_green_dark">#5D9988</color>-->
+<!--    <color name="blue_green_darker">#4E8071</color>-->
+<!--    <color name="blue_green_3">#65A693</color>-->
+<!--    <color name="black">#0F0F0F0F</color>-->
+<!--    <color name="white">#F0F0F0F0</color>-->
+
+    <color name="ice">#0A0D0B</color>
     <color name="blue_green_light">#16CC98</color>
-    <color name="blue_green_dark">#5D9988</color>
+    <color name="blue_green_dark">#1D2621</color>
     <color name="blue_green_darker">#4E8071</color>
-    <color name="blue_green_3">#65A693</color>
+    <color name="blue_green_3">#01CF66</color>
     <color name="black">#0F0F0F0F</color>
     <color name="white">#F0F0F0F0</color>
 </resources>
