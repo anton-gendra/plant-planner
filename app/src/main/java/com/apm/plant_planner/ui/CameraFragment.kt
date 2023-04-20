@@ -13,8 +13,19 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
+import com.apm.plant_planner.VolleyMultipartRequest
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,9 +54,58 @@ class CameraFragment : Fragment() {
             }
         }
 
-    private fun sendImage() {
-        //enviar bitmap al servidor
+    private fun sendImage() = runBlocking {
+
+        val apiKey = "2b10HxNDLtr5CbwAVr04hDaVwe"
+        val url = "https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=es&api-key=$apiKey"
+
+        val queue = Volley.newRequestQueue(requireContext())
+
+        //val byteArrayOutputStream = ByteArrayOutputStream()
+        //bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        //val imageByteArray = byteArrayOutputStream.toByteArray()
+
+        val multipartRequest = object : VolleyMultipartRequest(
+            Method.POST, url,
+            Response.Listener { response ->
+                val jsonString = String(response.data, Charsets.UTF_8)
+                // println("Response is: ${response.data}, statusCode: ${response.statusCode}, allHeader ${response.allHeaders}")
+                val jsonResponse = JSONObject(jsonString)
+                val bestMatch = jsonResponse.getString("bestMatch")
+                println("Match: ${bestMatch}")
+                              },
+            Response.ErrorListener { error ->
+                println("Error al realizar la petición: ${error.message}")
+            }
+        ) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $apiKey"
+                headers["accept"] = "application/json"
+                return headers
+            }
+
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+                params["organs"] = "flower"
+                return params
+            }
+
+            override fun getByteData(): MutableMap<String, DataPart> {
+                val params = HashMap<String, DataPart>()
+                val fileName = "image.jpg"
+                val byteArray = ByteArrayOutputStream()
+                bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, byteArray)
+                params["images"] = DataPart(fileName, byteArray.toByteArray(), "image/jpeg")
+                return params
+            }
+        }
+
+        // Agregar la solicitud a la cola de solicitudes
+        queue.add(multipartRequest)
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
