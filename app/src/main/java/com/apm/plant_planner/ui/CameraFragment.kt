@@ -15,6 +15,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +48,11 @@ class CameraFragment : Fragment() {
 
     private fun sendImage() {
         //enviar bitmap al servidor
+        // ejemplo de corrutina (apuntes)
+        GlobalScope.launch { // créaseunhanova corrutinaensegundoplano
+            delay(1000L) // delay non bloqueante(do thread actual) de 1000 milisegundos
+            println("Mundo!")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
