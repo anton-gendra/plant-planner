@@ -13,6 +13,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
 import kotlinx.coroutines.GlobalScope
@@ -52,6 +56,41 @@ class CameraFragment : Fragment() {
         GlobalScope.launch { // créaseunhanova corrutinaensegundoplano
             delay(1000L) // delay non bloqueante(do thread actual) de 1000 milisegundos
             println("Mundo!")
+
+            // peticiones con Volley
+            val queue = Volley.newRequestQueue(requireContext())
+
+            // obtener lista de especies (no es lo que hay que hacer, pero estoy probando)
+            // TODO: podemos utilizar este endpoint para tener una lista de especies que se usa en la app
+            // asi si el usuario quiere buscar especies en vez de sacar foto ya tneemos una lista de ellas
+            // y con los mismos nombres que los que detectara la camara (no se si me explique, soy angel)
+            val url = "https://my-api.plantnet.org/v2/languages"
+
+            // Request a string response from the provided URL.
+            val stringRequest = object : StringRequest(
+                Method.GET, url,
+                Response.Listener { response ->
+                    // Display the first 500 characters of the response string.
+                    //Toast.makeText(requireContext(), "Response is: ${response.substring(0, 500)}", Toast.LENGTH_SHORT).show()
+                    println("Response is: $response")
+                                  },
+                Response.ErrorListener {
+                    //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
+                    println("Error al realizar la petición")
+                }
+            ) {
+                // Override del método getHeaders() para agregar el encabezado Authorization
+                override fun getHeaders(): MutableMap<String, String> {
+                    val headers = HashMap<String, String>()
+                    val apiKey = "2b10HxNDLtr5CbwAVr04hDaVwe"
+                    headers["Authorization"] = "Bearer $apiKey"
+                    headers["accept"] = "application/json"
+                    return headers
+                }
+            }
+
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest)
         }
     }
 
