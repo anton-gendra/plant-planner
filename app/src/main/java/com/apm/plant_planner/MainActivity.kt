@@ -1,7 +1,9 @@
 package com.apm.plant_planner
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -10,12 +12,15 @@ import androidx.fragment.app.Fragment
 import com.apm.plant_planner.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+import com.apm.plant_planner.utils.*
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var currentPhotoPath: String
     val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setNewTheme(this, "main")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -59,5 +64,12 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.navHostFragment, selectedFragment).commit()
         }
         true
+    }
+
+    override fun onResume() {
+        if (themeHasChanged(this, "main")) {
+            recreate()
+        }
+        super.onResume()
     }
 }

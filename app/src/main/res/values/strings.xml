@@ -20,4 +20,8 @@
     <string name="social">Social</string>
     <string name="profile">Perfil</string>
     <string name="search_friends">Amigos</string>
+
+    <string name="theme_light">Light theme 1</string>
+    <string name="theme_light_1">Light theme 2</string>
+    <string name="dark_theme">Dark theme</string>
 </resources>

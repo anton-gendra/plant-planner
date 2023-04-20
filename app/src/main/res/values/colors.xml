@@ -5,31 +5,29 @@
     <color name="teal_200"></color>
 
 
+    <color name="radio_background">#800A0D0B</color>
+    <color name="hint_text">#590A0D0B</color>
 
-    <!--    light option2 -->
+    <!--    light option 1 -->
     <color name="ice">#068543</color>
     <color name="blue_green_light">#16CC98</color>
     <color name="blue_green_dark">#4CAF50</color>
-    <!--    <color name="blue_green_dark">#009688</color>-->
     <color name="blue_green_darker">#4E8071</color>
     <color name="blue_green_3">#65A693</color>
     <color name="black">#0F0F0F0F</color>
     <color name="white">#F0F0F0F0</color>
-<!--    light option2  -->
-<!--    <color name="ice">#8CE6CC</color>-->
-<!--    <color name="blue_green_light">#16CC98</color>-->
-<!--    <color name="blue_green_dark">#5D9988</color>-->
-<!--    <color name="blue_green_darker">#4E8071</color>-->
-<!--    <color name="blue_green_3">#65A693</color>-->
-<!--    <color name="black">#0F0F0F0F</color>-->
-<!--    <color name="white">#F0F0F0F0</color>-->
 
-<!--    light or dark option-->
-<!--    <color name="ice">#0A0D0B</color>-->
-<!--    <color name="blue_green_light">#16CC98</color>-->
-<!--    <color name="blue_green_dark">#1D2621</color>-->
-<!--    <color name="blue_green_darker">#4E8071</color>-->
-<!--    <color name="blue_green_3">#01CF66</color>-->
-<!--    <color name="black">#0F0F0F0F</color>-->
-<!--    <color name="white">#F0F0F0F0</color>-->
+<!--    light option 2  -->
+    <color name="ice2">#8CE6CC</color>
+    <color name="blue_green_light2">#16CC98</color>
+    <color name="blue_green_dark2">#5D9988</color>
+    <color name="blue_green_darker2">#4E8071</color>
+    <color name="blue_green_3_2">#65A693</color>
+
+    dark option
+    <color name="dark_ice">#0A0D0B</color>
+    <color name="dark_blue_green_light">#16CC98</color>
+    <color name="dark_blue_green_dark">#1D2621</color>
+    <color name="dark_blue_green_darker">#4E8071</color>
+    <color name="dark_blue_green_3">#01CF66</color>
 </resources>

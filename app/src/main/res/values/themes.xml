@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Plantplanner" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Plantplanner_light_1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/ice</item>
         <item name="colorPrimaryVariant">@color/blue_green_dark</item>
@@ -15,12 +15,53 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorSecondary">@color/black</item>
         <item name="android:windowBackground">@color/blue_green_dark</item>
-        <item name="hintTextColor">@color/black</item>
+        <item name="hintTextColor">@color/hint_text</item>
         <item name="colorAccent">@color/blue_green_darker</item>
         <item name="colorTertiary">@color/blue_green_3</item>
     </style>
     <style name="App.Button" parent="Widget.AppCompat.Button">
         <item name="backgroundTint">@color/blue_green_3</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Plantplanner_light_2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/ice2</item>
+        <item name="colorPrimaryVariant">@color/blue_green_dark2</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_green_light2</item>
+        <item name="colorSecondaryVariant">@color/blue_green_light2</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="21">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:windowBackground">@color/blue_green_dark2</item>
+        <item name="hintTextColor">@color/hint_text</item>
+        <item name="colorAccent">@color/blue_green_darker2</item>
+        <item name="colorTertiary">@color/blue_green_3_2</item>
+    </style>
+
+
+    <style name="Theme.Plantplanner_dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_ice</item>
+        <item name="colorPrimaryVariant">@color/dark_blue_green_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/dark_blue_green_light</item>
+        <item name="colorSecondaryVariant">@color/dark_blue_green_light</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="21">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:windowBackground">@color/dark_blue_green_dark</item>
+        <item name="hintTextColor">@color/hint_text</item>
+        <item name="colorAccent">@color/dark_blue_green_darker</item>
+        <item name="colorTertiary">@color/dark_blue_green_3</item>
     </style>
 </resources>

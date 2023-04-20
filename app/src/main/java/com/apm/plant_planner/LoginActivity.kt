@@ -6,18 +6,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import com.apm.plant_planner.utils.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setNewTheme(this, "login")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Version de Anton. TODO: revisar
-        /* val registerBtn: Button = findViewById(R.id.register_btn)
-        registerBtn.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+    }
+
+    override fun onResume() {
+        if (themeHasChanged(this, "login")) {
+            recreate()
         }
-        */
+        super.onResume()
     }
 
     fun register(view: View) {
