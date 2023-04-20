@@ -19,10 +19,13 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
+import com.apm.plant_planner.VolleyMultipartRequest
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,45 +55,57 @@ class CameraFragment : Fragment() {
         }
 
     private fun sendImage() = runBlocking {
-        //enviar bitmap al servidor
-        // ejemplo de corrutina (apuntes)
-        launch { // créaseunhanova corrutinaensegundoplano
-            // peticiones con Volley
-            val queue = Volley.newRequestQueue(requireContext())
 
-            // obtener lista de especies (no es lo que hay que hacer, pero estoy probando)
-            // TODO: podemos utilizar este endpoint para tener una lista de especies que se usa en la app
-            // asi si el usuario quiere buscar especies en vez de sacar foto ya tneemos una lista de ellas
-            // y con los mismos nombres que los que detectara la camara (no se si me explique, soy angel)
-            val url = "https://my-api.plantnet.org/v2/languages"
+        val apiKey = "2b10HxNDLtr5CbwAVr04hDaVwe"
+        val url = "https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=es&api-key=$apiKey"
 
-            // Request a string response from the provided URL.
-            val stringRequest = object : StringRequest(
-                Method.GET, url,
-                Response.Listener { response ->
-                    // Display the first 500 characters of the response string.
-                    //Toast.makeText(requireContext(), "Response is: ${response.substring(0, 500)}", Toast.LENGTH_SHORT).show()
-                    println("Response is: $response")
-                                  },
-                Response.ErrorListener {
-                    //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
-                    println("Error al realizar la petición")
-                }
-            ) {
-                // Override del método getHeaders() para agregar el encabezado Authorization
-                override fun getHeaders(): MutableMap<String, String> {
-                    val headers = HashMap<String, String>()
-                    val apiKey = "2b10HxNDLtr5CbwAVr04hDaVwe"
-                    headers["Authorization"] = "Bearer $apiKey"
-                    headers["accept"] = "application/json"
-                    return headers
-                }
+        val queue = Volley.newRequestQueue(requireContext())
+
+        //val byteArrayOutputStream = ByteArrayOutputStream()
+        //bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        //val imageByteArray = byteArrayOutputStream.toByteArray()
+
+        val multipartRequest = object : VolleyMultipartRequest(
+            Method.POST, url,
+            Response.Listener { response ->
+                val jsonString = String(response.data, Charsets.UTF_8)
+                // println("Response is: ${response.data}, statusCode: ${response.statusCode}, allHeader ${response.allHeaders}")
+                val jsonResponse = JSONObject(jsonString)
+                val bestMatch = jsonResponse.getString("bestMatch")
+                println("Match: ${bestMatch}")
+                              },
+            Response.ErrorListener { error ->
+                println("Error al realizar la petición: ${error.message}")
+            }
+        ) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer $apiKey"
+                headers["accept"] = "application/json"
+                return headers
             }
 
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest)
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+                params["organs"] = "flower"
+                return params
+            }
+
+            override fun getByteData(): MutableMap<String, DataPart> {
+                val params = HashMap<String, DataPart>()
+                val fileName = "image.jpg"
+                val byteArray = ByteArrayOutputStream()
+                bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, byteArray)
+                params["images"] = DataPart(fileName, byteArray.toByteArray(), "image/jpeg")
+                return params
+            }
         }
+
+        // Agregar la solicitud a la cola de solicitudes
+        queue.add(multipartRequest)
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
