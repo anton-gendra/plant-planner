@@ -22,6 +22,7 @@ import com.apm.plant_planner.SearchPlant
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,13 +51,10 @@ class CameraFragment : Fragment() {
             }
         }
 
-    private fun sendImage() {
+    private fun sendImage() = runBlocking {
         //enviar bitmap al servidor
         // ejemplo de corrutina (apuntes)
-        GlobalScope.launch { // créaseunhanova corrutinaensegundoplano
-            delay(1000L) // delay non bloqueante(do thread actual) de 1000 milisegundos
-            println("Mundo!")
-
+        launch { // créaseunhanova corrutinaensegundoplano
             // peticiones con Volley
             val queue = Volley.newRequestQueue(requireContext())
 
