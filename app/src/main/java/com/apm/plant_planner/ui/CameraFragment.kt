@@ -109,6 +109,8 @@ class CameraFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val plant_image = view?.findViewById<ImageView>(R.id.plantPreview)
+        plant_image?.setImageBitmap(bitmap)
     }
 
     override fun onCreateView(
