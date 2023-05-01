@@ -27,6 +27,11 @@ class Maps : AppCompatActivity(), OnMapReadyCallback {
                 .position(sydney)
                 .title("Marker in Sydney")
         )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        googleMap.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(sydney, 18f),
+            4000,
+            null
+        )
     }
 }
