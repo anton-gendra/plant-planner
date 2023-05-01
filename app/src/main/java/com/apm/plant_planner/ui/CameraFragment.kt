@@ -17,6 +17,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
 import com.apm.plant_planner.VolleyMultipartRequest
@@ -73,6 +74,11 @@ class CameraFragment : Fragment() {
                 val jsonResponse = JSONObject(jsonString)
                 val bestMatch = jsonResponse.getString("bestMatch")
                 println("Match: ${bestMatch}")
+
+                val intent = Intent(activity, PlantAtributtes::class.java)
+                intent.putExtra("EXTRA_MESSAGE", bestMatch)
+                intent.putExtra("EXTRA_BITMAP", bitmap)
+                startActivity(intent)
                               },
             Response.ErrorListener { error ->
                 println("Error al realizar la petición: ${error.message}")
