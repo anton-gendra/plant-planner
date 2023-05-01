@@ -206,5 +206,11 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
         Toast.makeText(this, "Estás en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT).show()
     }
 
+    //Nota:
+    //A veces al compilar luego de un rato, no se por que sale un error y no carga el map para
+    //la localizacion, la solucion que hago es: en el androidManifest: elimino la fila de: ACCESS_FINE_LOCATION
+    //Ejecuto y ya ejecuta, pero ahi para volver a pedir ese permiso. Paro el emulador, y pongo otra vez la linea borrada
+    //Y ahora ya me pide los permisos otra vez, acepto, y todo funciona OK
+
 //https://developers.google.com/maps/documentation/android-sdk/map-with-marker?hl=es-419
 }
