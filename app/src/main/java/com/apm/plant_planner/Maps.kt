@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.apm.plant_planner.R
 import com.google.android.gms.maps.*
 
+class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
+    GoogleMap.OnMyLocationClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private lateinit var map: GoogleMap
 
@@ -53,6 +55,8 @@ import com.google.android.gms.maps.*
             4000,
             null
         )
+        map.setOnMyLocationButtonClickListener(this)
+        map.setOnMyLocationClickListener(this)
         enableLocation()
     }
 
@@ -158,6 +162,14 @@ import com.google.android.gms.maps.*
         }
     }
 
+    override fun onMyLocationButtonClick(): Boolean {
+        Toast.makeText(this, "Boton pulsado", Toast.LENGTH_SHORT).show()
+        return false
+    }
+
+    override fun onMyLocationClick(p0: Location) {
+        Toast.makeText(this, "Estás en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT).show()
+    }
 
 //https://developers.google.com/maps/documentation/android-sdk/map-with-marker?hl=es-419
 }
