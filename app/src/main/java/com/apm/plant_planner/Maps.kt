@@ -43,9 +43,28 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
         Log.d("btnSetup", "Selected 111111111111111")
 
         createMarker()
+        addNewMarker()
+
         map.setOnMyLocationButtonClickListener(this)
         map.setOnMyLocationClickListener(this)
         enableLocation()
+    }
+
+    private fun addNewMarker() {
+        map.setOnMapClickListener(object :GoogleMap.OnMapClickListener {
+            override fun onMapClick(latlng :LatLng) {
+                // Clears the previously touched position
+                map.clear();
+                // Animating to the touched position
+                map.animateCamera(CameraUpdateFactory.newLatLng(latlng));
+
+                val location = LatLng(latlng.latitude,latlng.longitude)
+                    map.addMarker(MarkerOptions()
+                        .snippet(latlng.latitude.toString()+ " : " + latlng.longitude)
+                        .title("Planta")
+                        .position(location))
+            }
+        })
     }
 
     private fun createMarker() {
