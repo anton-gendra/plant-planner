@@ -34,4 +34,5 @@ class Maps : AppCompatActivity(), OnMapReadyCallback {
             null
         )
     }
+    //https://developers.google.com/maps/documentation/android-sdk/map-with-marker?hl=es-419
 }
