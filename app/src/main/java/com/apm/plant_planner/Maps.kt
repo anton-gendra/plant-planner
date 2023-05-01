@@ -70,7 +70,9 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
     ) == PackageManager.PERMISSION_GRANTED
 
     private fun enableLocation() {
-        //if(!::map.isInitialized) return
+        //map no actualizado -> out
+        if(!::map.isInitialized) return
+        //Si los permisos de localizacion estan activos -> activo localizacion en tiempo real
         if(isLocationPermissionGranted()) {
             if (ActivityCompat.checkSelfPermission(
                     this,
@@ -93,15 +95,18 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
             Log.d("btnSetup", "Selected 111111111111111 111111111")
 
         } else {
+            //Si no estan activos, pido los permisos
             Log.d("btnSetup", "Selected 111111111111111 22222")
             requestLocationPermission()
         }
     }
 
     private fun requestLocationPermission() {
+        //Si se pidieron los permisos pero los ha rechazado, sacamos un mensaje para que los active el usuario mismo
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             Toast.makeText(this, "Ve a ajustes y acepta los permisos de ubicación", Toast.LENGTH_SHORT).show()
         } else {
+            // Sino, se los pedimos
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE_LOCATION)
         }
     }
@@ -113,6 +118,7 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode) {
+            //Si los acepta, le activamos la localizacion
             REQUEST_CODE_LOCATION -> if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.checkSelfPermission(
                         this,
@@ -133,6 +139,7 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
                 }
                 map.isMyLocationEnabled = true
             } else {
+                //Sino, mostramos otro mensaje
                 Toast.makeText(this, "Ajustes -> Acepta permisos", Toast.LENGTH_SHORT).show()
 
             } else ->{}
@@ -140,6 +147,9 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
     }
 
     override fun onResumeFragments() {
+        //Si cojo y desactivo los permisos de esa app para la localizacion en el dispositivo:
+            //Comprobamos que los permisos siguen activos, si se puso la app en background,
+                //si cambiamos de app, etc...
         super.onResumeFragments()
         if (!::map.isInitialized) return
         if(!isLocationPermissionGranted()){
@@ -167,11 +177,13 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
     }
 
     override fun onMyLocationButtonClick(): Boolean {
+        //Mensaje, cuando pulsemos en el boton de arriba a la derecha para ir a nuestra localizacion
         Toast.makeText(this, "Boton pulsado", Toast.LENGTH_SHORT).show()
         return false
     }
 
     override fun onMyLocationClick(p0: Location) {
+        //Mensaje, con info de la localizacion, cuando pulsamos en nuestra localizacion
         Toast.makeText(this, "Estás en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT).show()
     }
 
