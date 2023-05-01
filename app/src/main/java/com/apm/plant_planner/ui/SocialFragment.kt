@@ -39,6 +39,13 @@ class SocialFragment : Fragment() {
             transaction.commit()
         }
 
+        val postButton: FloatingActionButton = view.findViewById(R.id.floatingActionButton8)
+        postButton.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.navHostFragment, PostFragment())
+            transaction.commit()
+        }
+
         return view;
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_social, container, false)
