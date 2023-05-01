@@ -42,6 +42,13 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
         map = googleMap
         Log.d("btnSetup", "Selected 111111111111111")
 
+        createMarker()
+        map.setOnMyLocationButtonClickListener(this)
+        map.setOnMyLocationClickListener(this)
+        enableLocation()
+    }
+
+    private fun createMarker() {
         val sydney = LatLng(-33.852, 151.211)
         map.addMarker(
             MarkerOptions()
@@ -55,9 +62,6 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
             4000,
             null
         )
-        map.setOnMyLocationButtonClickListener(this)
-        map.setOnMyLocationClickListener(this)
-        enableLocation()
     }
 
     private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
