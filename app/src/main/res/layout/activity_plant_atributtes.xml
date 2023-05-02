@@ -58,7 +58,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:text="Watering frequency"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinnerLocationHome"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <View
@@ -68,7 +68,7 @@
         android:layout_marginTop="16dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLocationHome" />
 
     <Button
         android:id="@+id/button2"
@@ -150,7 +150,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerLocationHome"
         android:layout_width="340dp"
         android:layout_height="54dp"
         android:layout_marginStart="32dp"
@@ -167,7 +167,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
-        android:text="Location at home"
+        android:text="Location at home*"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 

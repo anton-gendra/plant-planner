@@ -1,18 +1,14 @@
 package com.apm.plant_planner
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Camera
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantHomeLocation
+
 
 class PlantAtributtes : AppCompatActivity() {
 
@@ -20,7 +16,7 @@ class PlantAtributtes : AppCompatActivity() {
     var plant_type: String? = null
     var bitmap: Bitmap? = null
     var location_home: PlantHomeLocation? = null
-    var watering_frequency_days: Int? = null
+    var watering_frequency_weeks: Int? = null
     var location_map_name: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +38,14 @@ class PlantAtributtes : AppCompatActivity() {
             plantImageView.setImageBitmap(bitmap)
         }
 
+        // datos del Spinner para location_home
+        val locationHomeSpinner = findViewById<Spinner>(R.id.spinnerLocationHome)
+        locationHomeSpinner.adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            PlantHomeLocation.values()
+        )
+
         // Botones de la pantalla
         val changepicBtn: Button = findViewById(R.id.button)
         changepicBtn.setOnClickListener {
@@ -59,17 +63,18 @@ class PlantAtributtes : AppCompatActivity() {
         val addPlantBtn: Button = findViewById(R.id.button4)
         addPlantBtn.setOnClickListener {
             plant_name = plantNameEditText.text.toString()
+            location_home = locationHomeSpinner.selectedItem as PlantHomeLocation
             createPlant()
         }
     }
 
     fun createPlant() {
-        if (plant_type == null || plant_name == null) {
+        if (plant_type == null || plant_name == null || location_home == null) {
             Toast.makeText(this, "Por favor, rellena todos los campos marcador con *", Toast.LENGTH_SHORT).show()
         } else if (plant_name!! == "") {
             Toast.makeText(this, "Por favor, indique un nombre para su planta", Toast.LENGTH_SHORT).show()
         } else {
-            val plant = Plant(plant_name!!, plant_type!!, bitmap, location_home, watering_frequency_days, location_map_name)
+            val plant = Plant(plant_name!!, plant_type!!, bitmap, location_home, watering_frequency_weeks, location_map_name)
             Toast.makeText(this, "Planta creada correctamente", Toast.LENGTH_SHORT).show()
             println("Planta:")
             println(plant)

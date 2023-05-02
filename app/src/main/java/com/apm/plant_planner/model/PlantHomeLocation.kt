@@ -5,5 +5,6 @@ enum class PlantHomeLocation(val location_name: String) {
     BANO("Baño"),
     COCINA("Cocina"),
     TERRAZA("Terraza"),
-    HABITACION("Habitación")
+    HABITACION("Habitación"),
+    JARDIN("Jardín")
 }
