@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,6 +27,8 @@ class SearchFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: SearchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,28 +43,23 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
-        val cardButton: ConstraintLayout = view.findViewById(R.id.card_view)
-        cardButton.setOnClickListener {
-            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
-            startActivity(intent)
-        }
-        val cardButton2: ConstraintLayout = view.findViewById(R.id.card_view2)
-        cardButton2.setOnClickListener {
-            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
-            startActivity(intent)
-        }
-        val cardButton3: ConstraintLayout = view.findViewById(R.id.card_view3)
-        cardButton3.setOnClickListener {
-            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
-            startActivity(intent)
-        }
-        val cardButton4: ConstraintLayout = view.findViewById(R.id.card_view4)
-        cardButton4.setOnClickListener {
-            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
-            startActivity(intent)
-        }
+        // Inicializa el RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerView)
+        val myList : List<SearchItems> = mutableListOf(
+            SearchItems("Nombre1", "Nombre2", "Nombre3", "Nombre4")
+        )
+        // Crea el adaptador personalizado y asígnalo al RecyclerView
+        adapter = SearchAdapter(myList)
+        recyclerView.adapter = adapter
+
+        // Configura el RecyclerView con un LayoutManager
+        recyclerView.layoutManager = LinearLayoutManager(context)
         // Inflate the layout for this fragment
         return view
+    }
+
+    fun updateResults(newText: String?) {
+        adapter.filter.filter(newText)
     }
 
     companion object {
