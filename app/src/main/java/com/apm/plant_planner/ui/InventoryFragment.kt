@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
+import com.apm.plant_planner.model.Plant
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
@@ -18,6 +19,43 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  * create an instance of this fragment.
  */
 class InventoryFragment : Fragment() {
+
+    var ListPlant: ArrayList<Plant> = ArrayList<Plant>()
+
+    fun addPlant(plant: Plant) {
+        ListPlant.add(plant)
+    }
+
+    fun getPlantByName(plant_name: String): Plant? {
+        for (plant in ListPlant) {
+            if (plant.plant_name == plant_name) {
+                return plant
+            }
+        }
+        return null
+    }
+
+    fun deletePlant(plant_name: String) {
+        for (plant in ListPlant) {
+            if (plant.plant_name == plant_name) {
+                ListPlant.remove(plant)
+                return
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (ListPlant.isEmpty()) {
+            // si el inventario esta vacío, mostramos el fragment de EmptyInventory
+            println("Inventario vacío, mostrando fragmento de inventario vacío")
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.navHostFragment, EmptyInventoryFragment())
+                .commit()
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
