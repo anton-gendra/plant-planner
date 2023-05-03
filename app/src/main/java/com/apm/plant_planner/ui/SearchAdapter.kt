@@ -1,53 +1,28 @@
 package com.apm.plant_planner.ui;
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
+import com.google.android.material.internal.ContextUtils.getActivity
 import java.util.Locale
 import com.google.gson.Gson
 
 class SearchAdapter (private val originalList: List<SearchItems>) : RecyclerView.Adapter<SearchAdapter.MyViewHolder>(),
     Filterable {
 
-
-    // obtener lista de especies (no es lo que hay que hacer, pero estoy probando)
-    // TODO: podemos utilizar este endpoint para tener una lista de especies que se usa en la app
-    // asi si el usuario quiere buscar especies en vez de sacar foto ya tneemos una lista de ellas
-    // y con los mismos nombres que los que detectara la camara (no se si me explique, soy angel)
-    val url = "https://my-api.plantnet.org/v2/species?api-key=2b101nCSCBq24oD2NvMubv3gu"
-
-    // Request a string response from the provided URL.
-    val stringRequest = object : StringRequest(
-            Request.Method.GET, url,
-            Response.Listener { response ->
-            // Display the first 500 characters of the response string.
-            //Toast.makeText(requireContext(), "Response is: ${response.substring(0, 500)}", Toast.LENGTH_SHORT).show()
-            println("Response is: $response")
-                val gson = Gson()
-                val searchItemsList = gson.fromJson(response, Array<SearchItems>::class.java).toList()
-    },
-            Response.ErrorListener {
-        //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
-        println("Error al realizar la petición")
-    }
-            ) {
-        // Override del método getHeaders() para agregar el encabezado Authorization
-        override fun getHeaders(): MutableMap<String, String> {
-            val headers = HashMap<String, String>()
-            val apiKey = "2b10HxNDLtr5CbwAVr04hDaVwe"
-            headers["Authorization"] = "Bearer $apiKey"
-            headers["accept"] = "application/json"
-            return headers
-        }
-    }
+        private var plantList : List<String> = emptyList()
 
         private var filteredList: List<SearchItems> = originalList.toList()
 
@@ -56,6 +31,10 @@ class SearchAdapter (private val originalList: List<SearchItems>) : RecyclerView
             val textView2: TextView = itemView.findViewById(R.id.textView19)
             val textView3: TextView = itemView.findViewById(R.id.textView20)
             val textView4: TextView = itemView.findViewById(R.id.textView21)
+        }
+
+        fun updatePlantList(plantList: List<String>) {
+            this.plantList = plantList
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -78,17 +57,26 @@ class SearchAdapter (private val originalList: List<SearchItems>) : RecyclerView
         override fun getFilter(): Filter {
             return object : Filter() {
                 override fun performFiltering(constraint: CharSequence?): FilterResults {
-                    val searchText = constraint.toString().toLowerCase(Locale.ROOT)
-                    filteredList = if (searchText.isEmpty()) {
+                    val searchText = constraint.toString().lowercase(Locale.ROOT)
+
+                    filteredList = if (searchText.isEmpty() || plantList.isEmpty()) {
                         originalList.toList()
                     } else {
-                        originalList.filter {
-                            it.plantName1.toLowerCase(Locale.ROOT).contains(searchText) ||
-                                    it.plantName2.toLowerCase(Locale.ROOT).contains(searchText) ||
-                                    it.plantName3.toLowerCase(Locale.ROOT).contains(searchText) ||
-                                    it.plantName4.toLowerCase(Locale.ROOT).contains(searchText)
-                        }
+                        // get first 4 plants from plantList using the filter text
+                        val results = plantList.filter {
+                            it.lowercase(Locale.ROOT).contains(searchText)
+                        }.take(4)
+
+                        // create SearchItems taking into account that results may have less than 4 plants
+                        listOf(SearchItems(
+                            plantName1 = if (results.size >= 1) results[0] else "",
+                            plantName2 = if (results.size >= 2) results[1] else "",
+                            plantName3 = if (results.size >= 3) results[2] else "",
+                            plantName4 = if (results.size >= 4) results[3] else "",
+                        ))
+
                     }
+                    Log.e(TAG, "filteredList: $filteredList")
                     val filterResults = FilterResults()
                     filterResults.values = filteredList
                     return filterResults

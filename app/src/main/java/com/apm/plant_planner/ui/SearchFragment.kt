@@ -62,6 +62,10 @@ class SearchFragment : Fragment() {
         adapter.filter.filter(newText)
     }
 
+    fun updatePlantList(plantList: List<String>) {
+        adapter.updatePlantList(plantList)
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
