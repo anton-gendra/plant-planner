@@ -1,7 +1,11 @@
 QUERIES = [
+    """DROP TABLE IF EXISTS comment CASCADE;""",
+    """DROP TABLE IF EXISTS post CASCADE;""",
+    """DROP TABLE IF EXISTS user_profile CASCADE;""",
     """CREATE TABLE IF NOT EXISTS user_profile (
         id SERIAL NOT NULL PRIMARY KEY,
-        name VARCHAR(32) NOT NULL
+        name VARCHAR(32) NOT NULL,
+        password VARCHAR(64) NOT NULL
     );""",
     """CREATE TABLE IF NOT EXISTS post (
         id SERIAL NOT NULL PRIMARY KEY,

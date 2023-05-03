@@ -39,3 +39,22 @@ class DBController:
                 print(f"\033[91mError happened while creating table:\033[0m\n\nQuery:\n{query}\n\n{e}")
 
         self.connection.commit()
+
+    def execute_single_query(self, query, args):
+        with self.connection.cursor() as cur:
+            try:
+                cur.execute(query, args)
+                return cur.fetchone()
+
+            except psycopg2.Error as e:
+                print(f"\033[91mError happened while executing query:\033[0m\n\nQuery:\n{query}\n\n{e}")
+
+
+    def get_user_by_username(self, user_name: str):
+        query = """
+            SELECT id, name, password
+            FROM user_profile
+            WHERE name = %s;
+        """
+
+        return self.execute_single_query(query, [user_name])
