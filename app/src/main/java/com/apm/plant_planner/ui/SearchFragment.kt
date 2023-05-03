@@ -46,7 +46,7 @@ class SearchFragment : Fragment() {
         // Inicializa el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
         val myList : List<SearchItems> = mutableListOf(
-            SearchItems("Nombre1", "Nombre2", "Nombre3", "Nombre4")
+            SearchItems("Nombre1", "Nombre2", "Nombre3", "Nombre4"),
         )
         // Crea el adaptador personalizado y asígnalo al RecyclerView
         adapter = SearchAdapter(myList)

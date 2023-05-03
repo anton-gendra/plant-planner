@@ -6,16 +6,13 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
-
-import com.android.volley.toolbox.Volley;
 import com.apm.plant_planner.R
-import com.apm.plant_planner.SearchPlant
 import java.util.Locale
+import com.google.gson.Gson
 
 class SearchAdapter (private val originalList: List<SearchItems>) : RecyclerView.Adapter<SearchAdapter.MyViewHolder>(),
     Filterable {
@@ -62,7 +59,7 @@ class SearchAdapter (private val originalList: List<SearchItems>) : RecyclerView
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.fragment_search, parent, false)
+            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
             return MyViewHolder(itemView)
             // Aquí puedes inflar el diseño de cada elemento de la lista y devolver una instancia de MyViewHolder
         }
