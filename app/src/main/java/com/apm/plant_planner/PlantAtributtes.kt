@@ -1,5 +1,6 @@
 package com.apm.plant_planner
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Camera
@@ -8,6 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantHomeLocation
+import com.google.gson.Gson
 
 
 class PlantAtributtes : AppCompatActivity() {
@@ -18,6 +20,24 @@ class PlantAtributtes : AppCompatActivity() {
     var location_home: PlantHomeLocation? = null
     var watering_frequency_weeks: Int? = null
     var location_map_name: String? = null
+
+    fun savePlantList(plant: Plant): Boolean {
+        val sharedPreferences = applicationContext.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val plantListJson = sharedPreferences.getString("plant_list", "")
+        var plantList = Gson().fromJson(plantListJson, Array<Plant>::class.java).toList()
+
+        // check if plant name already exists
+        for (p in plantList) {
+            if (p.plant_name == plant.plant_name) {
+                return false
+            }
+        }
+
+        plantList += plant
+        val plantListJsonOutput = Gson().toJson(plantList)
+        sharedPreferences.edit().putString("plant_list", plantListJsonOutput).apply()
+        return true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,9 +95,11 @@ class PlantAtributtes : AppCompatActivity() {
             Toast.makeText(this, "Por favor, indique un nombre para su planta", Toast.LENGTH_SHORT).show()
         } else {
             val plant = Plant(plant_name!!, plant_type!!, bitmap, location_home, watering_frequency_weeks, location_map_name)
-            Toast.makeText(this, "Planta creada correctamente", Toast.LENGTH_SHORT).show()
-            println("Planta:")
-            println(plant)
+            if (savePlantList(plant)) {
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                Toast.makeText(this, "Plant name already exists", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.apm.plant_planner.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
 import com.apm.plant_planner.model.Plant
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 
 /**
  * A simple [Fragment] subclass.
@@ -20,39 +22,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  */
 class InventoryFragment : Fragment() {
 
-    var ListPlant: ArrayList<Plant> = ArrayList<Plant>()
-
-    fun addPlant(plant: Plant) {
-        ListPlant.add(plant)
-    }
-
-    fun getPlantByName(plant_name: String): Plant? {
-        for (plant in ListPlant) {
-            if (plant.plant_name == plant_name) {
-                return plant
-            }
-        }
-        return null
-    }
-
-    fun deletePlant(plant_name: String) {
-        for (plant in ListPlant) {
-            if (plant.plant_name == plant_name) {
-                ListPlant.remove(plant)
-                return
-            }
-        }
-    }
+    var plantList = emptyList<Plant>()
+    //val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        println("DEBUG: onCreate InventoryFragment")
         super.onCreate(savedInstanceState)
 
-        if (ListPlant.isEmpty()) {
+        val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val plantListJson = sharedPreferences.getString("plant_list", "")
+        plantList = Gson().fromJson(plantListJson, Array<Plant>::class.java).toList()
+
+        if (plantList.isEmpty()) {
             // si el inventario esta vacío, mostramos el fragment de EmptyInventory
-            println("Inventario vacío, mostrando fragmento de inventario vacío")
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.navHostFragment, EmptyInventoryFragment())
                 .commit()
+        } else {
+            // si el inventario no esta vacío, mostramos el fragment de Inventory
+            println("Inventario no vacío, mostrando el inventario")
+            println("DEBUG: plantList: $plantList")
         }
 
     }

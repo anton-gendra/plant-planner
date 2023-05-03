@@ -26,9 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(navListener)
-
         supportFragmentManager.beginTransaction().replace(R.id.navHostFragment,
-            EmptyInventoryFragment()).commit()
+            InventoryFragment()).commit()
     }
 
     private val navListener = BottomNavigationView.OnNavigationItemSelectedListener {
