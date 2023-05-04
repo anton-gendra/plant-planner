@@ -3,6 +3,7 @@ package com.apm.plant_planner
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Camera
 import android.os.Bundle
 import android.widget.*
@@ -10,16 +11,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantHomeLocation
 import com.google.gson.Gson
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 class PlantAtributtes : AppCompatActivity() {
 
     var mode: String? = null
     var old_plant_name: String? = null
+    var bitmap: Bitmap? = null
 
     var plant_name: String? = null
     var plant_type: String? = null
-    var bitmap: Bitmap? = null
+    var bitmapFileName: String? = null
     var location_home: PlantHomeLocation? = null
     var watering_frequency_weeks: Int? = null
 
@@ -60,16 +64,21 @@ class PlantAtributtes : AppCompatActivity() {
             findViewById<Button>(R.id.button4).setText("Guardar cambios")
             old_plant_name = intent.getStringExtra("EXTRA_NAME")
             plant_type = intent.getStringExtra("EXTRA_TYPE")
-            bitmap = intent.getParcelableExtra("EXTRA_BITMAP") as Bitmap?
+            bitmapFileName = intent.getStringExtra("EXTRA_BITMAP_FILE_NAME")
             location_home = intent.getStringExtra("EXTRA_LOCATION_HOME") as PlantHomeLocation?
+
+            if (bitmapFileName != null) {
+                val file = File(applicationContext.filesDir, bitmapFileName)
+                bitmap = BitmapFactory.decodeFile(file.absolutePath)
+            }
         } else {
             findViewById<TextView>(R.id.plant_name).setText("Añadir planta")
             findViewById<Button>(R.id.button4).setText("Añadir planta")
+            bitmap = intent.getParcelableExtra("EXTRA_BITMAP") as Bitmap?
         }
 
         plant_name = intent.getStringExtra("EXTRA_NAME")
         plant_type = intent.getStringExtra("EXTRA_TYPE")
-        bitmap = intent.getParcelableExtra("EXTRA_BITMAP") as Bitmap?
 
         val plantNameTextView = findViewById<TextView>(R.id.plant_name)
         plantNameTextView.setText(plant_type)
@@ -117,7 +126,18 @@ class PlantAtributtes : AppCompatActivity() {
         } else if (plant_name!! == "") {
             Toast.makeText(this, "Por favor, indique un nombre para su planta", Toast.LENGTH_SHORT).show()
         } else {
-            val plant = Plant(plant_name!!, plant_type!!, bitmap, location_home, watering_frequency_weeks)
+            var bitmapFileName: String? = null
+            val outputStream = ByteArrayOutputStream()
+            if (bitmap != null) {
+                bitmapFileName = "$plant_name.png"
+                bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                val byteArray = outputStream.toByteArray()
+                val file = File(this.filesDir, bitmapFileName)
+                file.writeBytes(byteArray)
+            }
+
+
+            val plant = Plant(plant_name!!, plant_type!!, bitmapFileName, location_home, watering_frequency_weeks)
             if (savePlantList(plant)) {
                 startActivity(Intent(this, MainActivity::class.java))
             } else {

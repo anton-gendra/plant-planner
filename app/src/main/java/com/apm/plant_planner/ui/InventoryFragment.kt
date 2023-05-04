@@ -65,7 +65,7 @@ class InventoryFragment : Fragment() {
             intent.putExtra("EXTRA_MODE", "edit")
             intent.putExtra("EXTRA_NAME", plantList[position].plant_name)
             intent.putExtra("EXTRA_TYPE", plantList[position].plant_type)
-            intent.putExtra("EXTRA_BITMAP", plantList[position].bitmap)
+            intent.putExtra("EXTRA_BITMAP_FILE_NAME", plantList[position].bitmapFileName)
             intent.putExtra("EXTRA_LOCATION_HOME", plantList[position].location_home)
 
             startActivity(intent)
