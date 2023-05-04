@@ -6,7 +6,7 @@ import android.os.Parcelable
 data class Plant (
     var plant_name: String,
     var plant_type: String,
-    var bitmap: Bitmap? = null,
+    var bitmapFileName: String? = null,
     var location_home: PlantHomeLocation? = null,
     var watering_frequency_weeks: Int? = null,
 )
