@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
@@ -23,7 +26,6 @@ import com.google.gson.Gson
 class InventoryFragment : Fragment() {
 
     var plantList = emptyList<Plant>()
-    //val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         println("DEBUG: onCreate InventoryFragment")
@@ -51,17 +53,24 @@ class InventoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_inventory, container, false)
-        val Button: FloatingActionButton = view.findViewById(R.id.floatingActionButton4)
-        Button.setOnClickListener {
+
+        var arrayAdapter: ArrayAdapter<Plant>
+        val plantas = view.findViewById<ListView>(R.id.plantas)
+
+        arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, plantList)
+        plantas.adapter = arrayAdapter
+
+        plantas.setOnItemClickListener() { parent, view, position, id ->
             val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+            intent.putExtra("EXTRA_MODE", "edit")
+            intent.putExtra("EXTRA_NAME", plantList[position].plant_name)
+            intent.putExtra("EXTRA_TYPE", plantList[position].plant_type)
+            intent.putExtra("EXTRA_BITMAP", plantList[position].bitmap)
+            intent.putExtra("EXTRA_LOCATION_HOME", plantList[position].location_home)
+
             startActivity(intent)
         }
-        val Button2: FloatingActionButton = view.findViewById(R.id.floatingActionButton5)
-        Button2.setOnClickListener {
-            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
-            startActivity(intent)
-        }
-        // Inflate the layout for this fragment
+
         return view
     }
 }

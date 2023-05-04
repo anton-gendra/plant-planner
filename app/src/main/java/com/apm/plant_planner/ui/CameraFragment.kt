@@ -70,7 +70,9 @@ class CameraFragment : Fragment() {
                 println("Match: ${bestMatch}")
 
                 val intent = Intent(activity, PlantAtributtes::class.java)
-                intent.putExtra("EXTRA_MESSAGE", bestMatch)
+                intent.putExtra("EXTRA_MODE", "new")
+                intent.putExtra("EXTRA_TYPE", bestMatch)
+                intent.putExtra("EXTRA_NAME", bestMatch)
                 intent.putExtra("EXTRA_BITMAP", bitmap)
                 startActivity(intent)
                               },
