@@ -24,7 +24,7 @@ class EmptyInventoryFragment : Fragment() {
         val CameraButton: Button = view.findViewById(R.id.button6)
         CameraButton.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.Layout, CameraFragment())
+            transaction?.replace(R.id.navHostFragment, CameraFragment())
             transaction?.disallowAddToBackStack()
             transaction?.commit()
         }
