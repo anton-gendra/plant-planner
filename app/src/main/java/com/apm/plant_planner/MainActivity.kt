@@ -26,9 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener(navListener)
-
         supportFragmentManager.beginTransaction().replace(R.id.navHostFragment,
-            EmptyInventoryFragment()).commit()
+            InventoryFragment()).commit()
     }
 
     private val navListener = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -36,21 +35,12 @@ class MainActivity : AppCompatActivity() {
         var activitySelected = 0;
         when (it.itemId) {
             R.id.page_inventory -> {
-                selectedFragment = EmptyInventoryFragment()
+                selectedFragment = InventoryFragment()
             }
             R.id.page_calendar -> {
                 selectedFragment = CalendarFragment()
             }
             R.id.page_camera -> {
-                /*val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                try {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-                } catch (e: ActivityNotFoundException) {
-                    // display error state to the user
-                }
-                selectedFragment = CameraFragment()*/
-                //startActivity(Intent(this, CameraActivity::class.java))
-                //activitySelected = 1
                 selectedFragment = CameraFragment()
             }
             R.id.page_social -> {
