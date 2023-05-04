@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:labelVisibilityMode="labeled"
+        android:theme="@style/Theme.Plantplanner_light_2"
         app:menu="@menu/bottom_navigation_menu" />
 
 

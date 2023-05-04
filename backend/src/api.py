@@ -3,7 +3,6 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from DBController import DBController
 from utils.token_utils import SessionCache
-from utils.decorators import is_logged
 
 from pydantic import BaseModel
 from typing import Annotated
@@ -24,7 +23,6 @@ class User(BaseModel):
     password: str
 
 @app.get("/")
-@is_logged
 def info():
     return {'API_description': "Backend for the android plant-planner app."}
 
@@ -32,7 +30,11 @@ def info():
 def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     raw_user = db.get_user_by_username(form_data.username)
     user = User(id=raw_user[0], name=raw_user[1], password=raw_user[2])
-    return {'user': user, 'access_token': session_manager.new_session(user.id), 'token_type': "bearer"}
+    if user.password == form_data.password:
+        return {'user': user, 'access_token': session_manager.new_session(user.id), 'token_type': "bearer"}
+    
+    else:
+        raise HTTPException(403, "Wrong authentication inputs.")
 
 @app.post("/whatever")
 def whatever(token: Annotated[str, Depends(oauth2_scheme)]):
