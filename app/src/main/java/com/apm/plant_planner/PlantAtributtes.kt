@@ -72,10 +72,6 @@ class PlantAtributtes : AppCompatActivity() {
             Toast.makeText(this, "Change plant picture", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, Camera::class.java))
         }
-        val changeMapLocationBtn: Button = findViewById(R.id.button2)
-        changeMapLocationBtn.setOnClickListener {
-            startActivity(Intent(this, MapPicker::class.java))
-        }
         val discardBtn: Button = findViewById(R.id.discard_btn)
         discardBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

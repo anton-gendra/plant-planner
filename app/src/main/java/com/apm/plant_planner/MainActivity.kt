@@ -16,9 +16,6 @@ import com.apm.plant_planner.utils.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var currentPhotoPath: String
-    val REQUEST_IMAGE_CAPTURE = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setNewTheme(this, "main")
         super.onCreate(savedInstanceState)
