@@ -1,5 +1,6 @@
 package com.apm.plant_planner
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+<<<<<<< HEAD
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -14,11 +16,25 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.utils.*
 import org.json.JSONObject
+=======
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.apm.plant_planner.model.Plant
+import com.apm.plant_planner.utils.*
+import com.google.gson.Gson
+>>>>>>> main
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setNewTheme(this, "login")
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = applicationContext.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        if (!sharedPreferences.contains("plant_list")) {
+            val plantList = emptyList<Plant>()
+            val plantListJson = Gson().toJson(plantList)
+            sharedPreferences.edit().putString("plant_list", plantListJson).apply()
+        }
+
         setContentView(R.layout.activity_login)
 
     }
@@ -36,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun logIn(view: View) {
-
 
         val queue = Volley.newRequestQueue(this)
         val url = "http://10.0.2.2:8000/user/login"

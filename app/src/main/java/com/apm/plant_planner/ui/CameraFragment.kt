@@ -13,16 +13,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
-import com.apm.plant_planner.SearchPlant
-import com.apm.plant_planner.VolleyMultipartRequest
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.apm.plant_planner.utils.VolleyMultipartRequest
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -73,6 +68,13 @@ class CameraFragment : Fragment() {
                 val jsonResponse = JSONObject(jsonString)
                 val bestMatch = jsonResponse.getString("bestMatch")
                 println("Match: ${bestMatch}")
+
+                val intent = Intent(activity, PlantAtributtes::class.java)
+                intent.putExtra("EXTRA_MODE", "new")
+                intent.putExtra("EXTRA_TYPE", bestMatch)
+                intent.putExtra("EXTRA_NAME", bestMatch)
+                intent.putExtra("EXTRA_BITMAP", bitmap)
+                startActivity(intent)
                               },
             Response.ErrorListener { error ->
                 println("Error al realizar la petición: ${error.message}")
@@ -109,6 +111,8 @@ class CameraFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val plant_image = view?.findViewById<ImageView>(R.id.plantPreview)
+        plant_image?.setImageBitmap(bitmap)
     }
 
     override fun onCreateView(
