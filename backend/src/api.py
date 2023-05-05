@@ -33,6 +33,7 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     if user.password == form_data.password or (form_data.username.lower() == 'admin' and form_data.password.lower() == 'admin'):
         if form_data.username.lower() == 'admin' and form_data.password.lower() == 'admin':
             return {'access_token': session_manager.new_session(-1), 'token_type': "bearer"}
+        
         return {'user': user, 'access_token': session_manager.new_session(user.id), 'token_type': "bearer"}
     
     else:

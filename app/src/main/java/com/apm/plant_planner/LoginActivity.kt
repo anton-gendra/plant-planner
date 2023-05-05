@@ -34,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
+        if (sharedPreferences.contains("username")) {
+            sendLoginRequest(sharedPreferences.getString("username", ""), sharedPreferences.getString("password", ""), this)
+        }
+
     }
 
     override fun onResume() {
@@ -49,40 +53,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun logIn(view: View) {
-
-        val queue = Volley.newRequestQueue(this)
-        val url = "http://10.0.2.2:8000/user/login"
-
         val nameElement: EditText = findViewById(R.id.editTextTextPersonName2)
         val passElement: EditText = findViewById(R.id.editTextTextPassword)
 
-        val body = HashMap<String, String>()
-        body["username"] = nameElement.text.toString()
-        body["password"] = passElement.text.toString()
-
-        val request = object: StringRequest(
-            Method.POST, url,
-            Response.Listener<String> { response ->
-
-                Toast.makeText(applicationContext, "Login data: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            },
-             Response.ErrorListener { error ->
-                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_SHORT).show()
-            }
-        ) {
-            override fun getBodyContentType(): String {
-                return "application/x-www-form-urlencoded"
-            }
-
-            override fun getParams(): MutableMap<String, String>? {
-                return body
-            }
-        }
-
-        queue.add(request)
+        sendLoginRequest(nameElement.text.toString(), passElement.text.toString(), this)
     }
 
     fun logInTwitter(view: View) {
@@ -92,4 +66,47 @@ class LoginActivity : AppCompatActivity() {
     fun logInGoogle(view: View) {
         Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT).show()
     }
+}
+
+fun sendLoginRequest(username: String?, password: String?, context: Context) {
+    val queue = Volley.newRequestQueue(context)
+    val url = "http://10.0.2.2:8000/user/login"
+
+    val body = HashMap<String, String>()
+    if (username != null && password != null) {
+        body["username"] = username
+        body["password"] = password
+    }
+
+    val request = object: StringRequest(
+        Method.POST, url,
+        Response.Listener<String> { response ->
+            val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            if (!sharedPreferences.contains("username")) {
+                with(sharedPreferences.edit()) {
+                    putString("username", username)
+                    putString("password", password)
+                    apply()
+                }
+            }
+
+            Toast.makeText(context, "Login data: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+        },
+        Response.ErrorListener { error ->
+            Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
+        }
+    ) {
+        override fun getBodyContentType(): String {
+            return "application/x-www-form-urlencoded"
+        }
+
+        override fun getParams(): MutableMap<String, String>? {
+            return body
+        }
+    }
+
+    queue.add(request)
 }
