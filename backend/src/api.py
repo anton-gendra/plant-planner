@@ -22,9 +22,14 @@ class User(BaseModel):
     name: str
     password: str
 
+class RegisterUser(BaseModel):
+    name: str
+    password: str
+
 @app.get("/")
 def info():
     return {'API_description': "Backend for the android plant-planner app."}
+
 
 @app.post("/user/login")
 def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
@@ -38,10 +43,18 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     
     else:
         raise HTTPException(403, "Wrong authentication inputs.")
+    
+
+@app.post("/user/register")
+def register(user: RegisterUser):
+    user_id = db.register_user(user)
+    return {'status': "OK", 'detail': "User registered."}
+
 
 @app.post("/whatever")
 def whatever(token: Annotated[str, Depends(oauth2_scheme)]):
     return {"token": token}
+
 
 @app.put("/post/create")
 def create_post(author: int):
@@ -49,6 +62,18 @@ def create_post(author: int):
 
     return {'status': "OK", 'detail': "Post added."}
 
+
 @app.get("/post/{post_id}")
 def get_post(post_id: int):
     return {'status': "OK", 'detail': "Not implemented yet."}
+
+
+@app.get("/users")
+def get_users():
+    return {'status': "OK", 'users': db.get_all_users()}
+
+
+@app.delete("/user")
+def delete_user(id: int):
+    db.remove_user(id)
+    return {'status': "OK"}
