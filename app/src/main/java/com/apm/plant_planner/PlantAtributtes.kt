@@ -60,7 +60,7 @@ class PlantAtributtes : AppCompatActivity() {
         if (mode == "edit") {
             Toast.makeText(this, "Edit plant", Toast.LENGTH_LONG).show()
             // change textView title
-            findViewById<TextView>(R.id.plant_name).setText("Editar planta")
+            findViewById<TextView>(R.id.textView).setText("Editar planta")
             findViewById<Button>(R.id.button4).setText("Guardar cambios")
             old_plant_name = intent.getStringExtra("EXTRA_NAME")
             plant_type = intent.getStringExtra("EXTRA_TYPE")
@@ -72,7 +72,7 @@ class PlantAtributtes : AppCompatActivity() {
                 bitmap = BitmapFactory.decodeFile(file.absolutePath)
             }
         } else {
-            findViewById<TextView>(R.id.plant_name).setText("Añadir planta")
+            findViewById<TextView>(R.id.textView).setText("Añadir planta")
             findViewById<Button>(R.id.button4).setText("Añadir planta")
             bitmap = intent.getParcelableExtra("EXTRA_BITMAP") as Bitmap?
         }
@@ -108,10 +108,21 @@ class PlantAtributtes : AppCompatActivity() {
             Toast.makeText(this, "Change plant picture", Toast.LENGTH_LONG).show()
             //startActivity(Intent(this, Camera::class.java))
         }
+
         val discardBtn: Button = findViewById(R.id.discard_btn)
-        discardBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        if (mode == "edit") {
+            discardBtn.setText("Eliminar planta")
+            discardBtn.setBackgroundColor(0xFFFF0000.toInt())
+            discardBtn.setOnClickListener{
+                deletePlant()
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        } else {
+            discardBtn.setOnClickListener {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
         }
+
         val addPlantBtn: Button = findViewById(R.id.button4)
         addPlantBtn.setOnClickListener {
             plant_name = plantNameEditText.text.toString()
@@ -144,6 +155,20 @@ class PlantAtributtes : AppCompatActivity() {
                 Toast.makeText(this, "Plant name already exists", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun deletePlant() {
+        val sharedPreferences = applicationContext.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val plantListJson = sharedPreferences.getString("plant_list", "")
+        var plantList = Gson().fromJson(plantListJson, Array<Plant>::class.java).toList()
+
+        // if mode edit, remove old plant
+        if (mode == "edit") {
+            plantList = plantList.filter { it.plant_name != old_plant_name }
+        }
+
+        val plantListJsonOutput = Gson().toJson(plantList)
+        sharedPreferences.edit().putString("plant_list", plantListJsonOutput).apply()
     }
 
 }
