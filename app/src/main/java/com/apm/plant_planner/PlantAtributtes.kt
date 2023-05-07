@@ -1,12 +1,15 @@
 package com.apm.plant_planner
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Camera
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantHomeLocation
@@ -20,6 +23,7 @@ class PlantAtributtes : AppCompatActivity() {
     var mode: String? = null
     var old_plant_name: String? = null
     var bitmap: Bitmap? = null
+    var imageHasChanged: Boolean = false
 
     var plant_name: String? = null
     var plant_type: String? = null
@@ -49,6 +53,18 @@ class PlantAtributtes : AppCompatActivity() {
         sharedPreferences.edit().putString("plant_list", plantListJsonOutput).apply()
         return true
     }
+
+    // Get your image
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                if (result?.data != null) {
+                    bitmap = result.data?.extras?.get("data") as Bitmap
+                    val plant_image = findViewById<ImageView>(R.id.plant_image)
+                    plant_image?.setImageBitmap(bitmap)
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,8 +121,8 @@ class PlantAtributtes : AppCompatActivity() {
         // Botones de la pantalla
         val changepicBtn: Button = findViewById(R.id.button)
         changepicBtn.setOnClickListener {
-            Toast.makeText(this, "Change plant picture", Toast.LENGTH_LONG).show()
-            //startActivity(Intent(this, Camera::class.java))
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            resultLauncher.launch(cameraIntent)
         }
 
         val discardBtn: Button = findViewById(R.id.discard_btn)
