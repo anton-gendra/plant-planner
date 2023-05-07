@@ -1,6 +1,7 @@
 package com.apm.plant_planner
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -130,8 +131,18 @@ class PlantAtributtes : AppCompatActivity() {
             discardBtn.setText("Eliminar planta")
             discardBtn.setBackgroundColor(0xFFFF0000.toInt())
             discardBtn.setOnClickListener{
-                deletePlant()
-                startActivity(Intent(this, MainActivity::class.java))
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Eliminar planta?")
+                    .setCancelable(false)
+                    .setPositiveButton("Sí") { _, _ ->
+                        deletePlant()
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+                    .setNegativeButton("No") { dialog, _ ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                builder.create().show()
             }
         } else {
             discardBtn.setOnClickListener {
