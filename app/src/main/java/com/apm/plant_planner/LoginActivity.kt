@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
     fun logIn(view: View) {
 
         val queue = Volley.newRequestQueue(this)
-        val url = "http://10.0.2.2:8000/user/login"
+        val url = "http://10.0.2.2:14000/user/login"
 
         val nameElement: EditText = findViewById(R.id.editTextTextPersonName2)
         val passElement: EditText = findViewById(R.id.editTextTextPassword)
