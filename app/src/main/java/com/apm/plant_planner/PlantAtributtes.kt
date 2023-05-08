@@ -1,12 +1,16 @@
 package com.apm.plant_planner
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Camera
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantHomeLocation
@@ -20,6 +24,7 @@ class PlantAtributtes : AppCompatActivity() {
     var mode: String? = null
     var old_plant_name: String? = null
     var bitmap: Bitmap? = null
+    var imageHasChanged: Boolean = false
 
     var plant_name: String? = null
     var plant_type: String? = null
@@ -50,6 +55,18 @@ class PlantAtributtes : AppCompatActivity() {
         return true
     }
 
+    // Get your image
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                if (result?.data != null) {
+                    bitmap = result.data?.extras?.get("data") as Bitmap
+                    val plant_image = findViewById<ImageView>(R.id.plant_image)
+                    plant_image?.setImageBitmap(bitmap)
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_atributtes)
@@ -60,7 +77,7 @@ class PlantAtributtes : AppCompatActivity() {
         if (mode == "edit") {
             Toast.makeText(this, "Edit plant", Toast.LENGTH_LONG).show()
             // change textView title
-            findViewById<TextView>(R.id.plant_name).setText("Editar planta")
+            findViewById<TextView>(R.id.textView).setText("Editar planta")
             findViewById<Button>(R.id.button4).setText("Guardar cambios")
             old_plant_name = intent.getStringExtra("EXTRA_NAME")
             plant_type = intent.getStringExtra("EXTRA_TYPE")
@@ -72,7 +89,7 @@ class PlantAtributtes : AppCompatActivity() {
                 bitmap = BitmapFactory.decodeFile(file.absolutePath)
             }
         } else {
-            findViewById<TextView>(R.id.plant_name).setText("Añadir planta")
+            findViewById<TextView>(R.id.textView).setText("Añadir planta")
             findViewById<Button>(R.id.button4).setText("Añadir planta")
             bitmap = intent.getParcelableExtra("EXTRA_BITMAP") as Bitmap?
         }
@@ -105,13 +122,34 @@ class PlantAtributtes : AppCompatActivity() {
         // Botones de la pantalla
         val changepicBtn: Button = findViewById(R.id.button)
         changepicBtn.setOnClickListener {
-            Toast.makeText(this, "Change plant picture", Toast.LENGTH_LONG).show()
-            //startActivity(Intent(this, Camera::class.java))
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            resultLauncher.launch(cameraIntent)
         }
+
         val discardBtn: Button = findViewById(R.id.discard_btn)
-        discardBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        if (mode == "edit") {
+            discardBtn.setText("Eliminar planta")
+            discardBtn.setBackgroundColor(0xFFFF0000.toInt())
+            discardBtn.setOnClickListener{
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Eliminar planta?")
+                    .setCancelable(false)
+                    .setPositiveButton("Sí") { _, _ ->
+                        deletePlant()
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+                    .setNegativeButton("No") { dialog, _ ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                builder.create().show()
+            }
+        } else {
+            discardBtn.setOnClickListener {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
         }
+
         val addPlantBtn: Button = findViewById(R.id.button4)
         addPlantBtn.setOnClickListener {
             plant_name = plantNameEditText.text.toString()
@@ -144,6 +182,20 @@ class PlantAtributtes : AppCompatActivity() {
                 Toast.makeText(this, "Plant name already exists", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun deletePlant() {
+        val sharedPreferences = applicationContext.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val plantListJson = sharedPreferences.getString("plant_list", "")
+        var plantList = Gson().fromJson(plantListJson, Array<Plant>::class.java).toList()
+
+        // if mode edit, remove old plant
+        if (mode == "edit") {
+            plantList = plantList.filter { it.plant_name != old_plant_name }
+        }
+
+        val plantListJsonOutput = Gson().toJson(plantList)
+        sharedPreferences.edit().putString("plant_list", plantListJsonOutput).apply()
     }
 
 }

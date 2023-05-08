@@ -15,6 +15,7 @@ import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
 import com.apm.plant_planner.SearchPlant
 import com.apm.plant_planner.model.Plant
+import com.apm.plant_planner.model.PlantAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 
@@ -54,11 +55,10 @@ class InventoryFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_inventory, container, false)
 
-        var arrayAdapter: ArrayAdapter<Plant>
+        var plantAdapter = PlantAdapter(requireContext(), plantList)
         val plantas = view.findViewById<ListView>(R.id.plantas)
 
-        arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, plantList)
-        plantas.adapter = arrayAdapter
+        plantas.adapter = plantAdapter
 
         plantas.setOnItemClickListener() { parent, view, position, id ->
             val intent = Intent(requireActivity(), PlantAtributtes::class.java)
