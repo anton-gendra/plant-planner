@@ -3,7 +3,9 @@ package com.apm.plant_planner
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +33,7 @@ class SearchPlant : AppCompatActivity() {
         // y con los mismos nombres que los que detectara la camara (no se si me explique, soy angel)
 
         val queue= Volley.newRequestQueue(this)
+        var progressBar = findViewById<ProgressBar>(R.id.progressBar2)
         val url = "https://my-api.plantnet.org/v2/species?api-key=2b101nCSCBq24oD2NvMubv3gu"
 
         // Request a string response from the provided URL.
@@ -44,10 +47,12 @@ class SearchPlant : AppCompatActivity() {
                 val searchItemsList = gson.fromJson(response, Array<PlantResponse>::class.java).toList().map {
                     it.scientificNameWithoutAuthor
                 }
+                progressBar?.visibility = View.GONE
                 val fragment = supportFragmentManager.findFragmentById(R.id.frameContainer) as SearchFragment
                 fragment.updatePlantList(searchItemsList)
             },
             Response.ErrorListener { error ->
+                progressBar?.visibility = View.GONE
                 println(error.toString())
                 //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
                 println("Error al realizar la petición")
