@@ -6,30 +6,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
-import com.apm.plant_planner.SearchPlant
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 
-/**
- * A simple [Fragment] subclass.
- * Use the [InventoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InventoryFragment : Fragment() {
 
     var plantList = emptyList<Plant>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        println("DEBUG: onCreate InventoryFragment")
         super.onCreate(savedInstanceState)
 
         val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
@@ -41,12 +30,7 @@ class InventoryFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.navHostFragment, EmptyInventoryFragment())
                 .commit()
-        } else {
-            // si el inventario no esta vacío, mostramos el fragment de Inventory
-            println("Inventario no vacío, mostrando el inventario")
-            println("DEBUG: plantList: $plantList")
         }
-
     }
 
     override fun onCreateView(
