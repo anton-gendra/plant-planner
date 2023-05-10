@@ -70,7 +70,9 @@ class LoginActivity : AppCompatActivity() {
 
 fun sendLoginRequest(username: String?, password: String?, context: Context) {
     val queue = Volley.newRequestQueue(context)
-    val url = "http://10.0.2.2:8000/user/login"
+    val ip = Properties().serverIp
+    val port = Properties().serverPort
+    val url = "http://$ip:$port/user/login"
 
     val body = HashMap<String, String>()
     if (username != null && password != null) {

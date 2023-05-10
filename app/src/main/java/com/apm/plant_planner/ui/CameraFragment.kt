@@ -18,6 +18,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
+import com.apm.plant_planner.utils.Properties
 import com.apm.plant_planner.utils.VolleyMultipartRequest
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
@@ -45,7 +46,7 @@ class CameraFragment : Fragment() {
 
     private fun sendImage() = runBlocking {
 
-        val apiKey = "2b10HxNDLtr5CbwAVr04hDaVwe"
+        val apiKey = Properties().plantNetApiKey
         val url = "https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&lang=es&api-key=$apiKey"
 
         val queue = Volley.newRequestQueue(requireContext())
