@@ -1,5 +1,6 @@
 package com.apm.plant_planner.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.apm.plant_planner.Post
 import com.apm.plant_planner.R
+import com.apm.plant_planner.model.Plant
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 
 /**
  * A simple [Fragment] subclass.
@@ -20,6 +23,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  * create an instance of this fragment.
  */
 class SocialFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        if (!sharedPreferences.contains("username")) {
+            // si el inventario esta vacío, mostramos el fragment de EmptyInventory
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.navHostFragment, NotSignInFragment())
+                .commit()
+        }
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,6 +52,13 @@ class SocialFragment : Fragment() {
         searchFriendsBtn.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.navHostFragment, SearchFriendsFragment())
+            transaction.commit()
+        }
+
+        val postButton: FloatingActionButton = view.findViewById(R.id.floatingActionButton8)
+        postButton.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.navHostFragment, PostFragment())
             transaction.commit()
         }
 

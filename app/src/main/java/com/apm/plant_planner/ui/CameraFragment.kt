@@ -11,36 +11,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
-import com.apm.plant_planner.SearchPlant
-import com.apm.plant_planner.VolleyMultipartRequest
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.apm.plant_planner.utils.VolleyMultipartRequest
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CameraFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CameraFragment : Fragment() {
 
     private var bitmap: Bitmap? = null
     private var view: View? = null
+
+    var progressBar: ProgressBar? = null
+    var detectar: Button? = null
 
     // Get your image
     private val resultLauncher =
@@ -69,13 +58,20 @@ class CameraFragment : Fragment() {
             Method.POST, url,
             Response.Listener { response ->
                 val jsonString = String(response.data, Charsets.UTF_8)
-                // println("Response is: ${response.data}, statusCode: ${response.statusCode}, allHeader ${response.allHeaders}")
                 val jsonResponse = JSONObject(jsonString)
                 val bestMatch = jsonResponse.getString("bestMatch")
-                println("Match: ${bestMatch}")
-                              },
+
+                val intent = Intent(activity, PlantAtributtes::class.java)
+                intent.putExtra("EXTRA_MODE", "new")
+                intent.putExtra("EXTRA_TYPE", bestMatch)
+                intent.putExtra("EXTRA_NAME", bestMatch)
+                intent.putExtra("EXTRA_BITMAP", bitmap)
+                startActivity(intent)
+            },
             Response.ErrorListener { error ->
-                println("Error al realizar la petición: ${error.message}")
+                progressBar?.visibility = View.GONE
+                detectar?.visibility = View.VISIBLE
+                Toast.makeText(requireContext(), "Error al realizar la petición: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         ) {
             override fun getHeaders(): MutableMap<String, String> {
@@ -109,6 +105,8 @@ class CameraFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val plant_image = view?.findViewById<ImageView>(R.id.plantPreview)
+        plant_image?.setImageBitmap(bitmap)
     }
 
     override fun onCreateView(
@@ -121,6 +119,9 @@ class CameraFragment : Fragment() {
         val btnTakePhoto: Button = viewLoc.findViewById(R.id.btnTakePhoto)
         val btnDetectar: Button = viewLoc.findViewById(R.id.detectar)
 
+        progressBar = view?.findViewById<ProgressBar>(R.id.progressBar)
+        detectar = view?.findViewById<Button>(R.id.detectar)
+
         // Boton para la camara
         btnTakePhoto.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -130,6 +131,8 @@ class CameraFragment : Fragment() {
         // Boton para enviar imagen
         btnDetectar.setOnClickListener {
             if (bitmap != null) {
+                detectar?.visibility = View.GONE
+                progressBar?.visibility = View.VISIBLE
                 sendImage()
             } else {
                 Toast.makeText(requireContext(), "No hay una imagen disponible.", Toast.LENGTH_SHORT).show()

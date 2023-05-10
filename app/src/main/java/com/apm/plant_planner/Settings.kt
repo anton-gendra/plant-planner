@@ -20,6 +20,28 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+
+
+        val logOutBtn: Button = findViewById(R.id.close_session_btn)
+        logOutBtn.setOnClickListener {
+            val sharedPref = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            with (sharedPref.edit()) {
+                remove("username")
+                remove("password")
+                apply()
+            }
+
+
+            Toast.makeText(this, "Closing session", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+
+
+
+
+
+
         val switchDarkMode: SwitchCompat = findViewById(R.id.theme_switch)
         switchDarkMode.setOnClickListener {
             if (switchDarkMode.isChecked) {
@@ -27,11 +49,6 @@ class Settings : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Dark mode deactivated", Toast.LENGTH_SHORT).show()
             }
-        }
-
-        val closeSessionBtn: Button = findViewById(R.id.close_session_btn)
-        closeSessionBtn.setOnClickListener {
-            Toast.makeText(this, "Session closed", Toast.LENGTH_SHORT).show()
         }
 
         val lightBtn: RadioButton = findViewById(R.id.light_theme)

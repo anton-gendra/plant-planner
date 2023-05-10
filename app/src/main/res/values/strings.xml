@@ -21,7 +21,11 @@
     <string name="profile">Perfil</string>
     <string name="search_friends">Amigos</string>
 
+    <string name="close_session">Cerrar sesión</string>
+
     <string name="theme_light">Light theme 1</string>
     <string name="theme_light_1">Light theme 2</string>
     <string name="dark_theme">Dark theme</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
