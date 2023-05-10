@@ -32,12 +32,11 @@ class LoginActivity : AppCompatActivity() {
             sharedPreferences.edit().putString("plant_list", plantListJson).apply()
         }
 
-        setContentView(R.layout.activity_login)
-
         if (sharedPreferences.contains("username")) {
             sendLoginRequest(sharedPreferences.getString("username", ""), sharedPreferences.getString("password", ""), this)
         }
 
+        setContentView(R.layout.activity_login)
     }
 
     override fun onResume() {
@@ -66,11 +65,16 @@ class LoginActivity : AppCompatActivity() {
     fun logInGoogle(view: View) {
         Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT).show()
     }
+
+    fun enterWithoutLogin(view: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }
 
 fun sendLoginRequest(username: String?, password: String?, context: Context) {
     val queue = Volley.newRequestQueue(context)
-    val url = "http://10.0.2.2:8000/user/login"
+    val url = "http://10.0.2.2:14000/user/login"
 
     val body = HashMap<String, String>()
     if (username != null && password != null) {
