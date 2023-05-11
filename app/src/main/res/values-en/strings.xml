@@ -19,4 +19,14 @@
     <string name="calendar">Calendar</string>
     <string name="social">Social</string>
     <string name="profile">Profile</string>
+
+    <string name="search_friends">Friends</string>
+
+    <string name="close_session">Close session</string>
+
+    <string name="theme_light">Light theme 1</string>
+    <string name="theme_light_1">Light theme 2</string>
+    <string name="dark_theme">Dark theme</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
