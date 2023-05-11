@@ -22,7 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/_30530a4e77044978e7308e7a2b10a0d"
+        android:src="@android:drawable/ic_menu_add"
         android:contentDescription="Submit"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/ice"
+        />
 </FrameLayout>
