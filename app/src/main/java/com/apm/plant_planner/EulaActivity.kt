@@ -20,7 +20,7 @@ class EulaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferences = applicationContext
-            .getSharedPreferences("com.apm.plant_planner", MODE_PRIVATE)
+            .getSharedPreferences("my_prefs", MODE_PRIVATE)
         setContentView(R.layout.activity_eula)
         initializeUI()
     }

@@ -28,6 +28,7 @@ class Settings : AppCompatActivity() {
             with (sharedPref.edit()) {
                 remove("username")
                 remove("password")
+                remove("eulaAccepted")
                 apply()
             }
 

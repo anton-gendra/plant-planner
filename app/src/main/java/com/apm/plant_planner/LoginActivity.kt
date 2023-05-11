@@ -31,18 +31,21 @@ class LoginActivity : AppCompatActivity() {
             val plantListJson = Gson().toJson(plantList)
             sharedPreferences.edit().putString("plant_list", plantListJson).apply()
         }
+        if (!sharedPreferences.contains("eulaAccepted")) {
+            sharedPreferences.edit().putBoolean("eulaAccepted", false).apply()
+        }
 
         if (sharedPreferences.contains("username")) {
             sendLoginRequest(sharedPreferences.getString("username", ""), sharedPreferences.getString("password", ""), this)
         }
         setContentView(R.layout.activity_login)
-        //checkEula()
+        checkEula()
     }
 
-/*
+
     private fun checkEula() {
         val preferences = applicationContext
-            .getSharedPreferences("com.apm.plant_planner", Context.MODE_PRIVATE)
+            .getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         val eulaAccepted = preferences.getBoolean("eulaAccepted", false)
         if (!eulaAccepted) {
             val intent = Intent(this, EulaActivity::class.java)
@@ -52,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivityForResult(intent, 1)
         }
-    } */
+    }
 
     override fun onResume() {
         if (themeHasChanged(this, "login")) {
