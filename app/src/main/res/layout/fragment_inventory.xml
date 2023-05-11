@@ -16,4 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/_30530a4e77044978e7308e7a2b10a0d"
+        android:contentDescription="Submit"
+        android:layout_margin="16dp" />
 </FrameLayout>

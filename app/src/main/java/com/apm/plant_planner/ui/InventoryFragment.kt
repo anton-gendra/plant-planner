@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
@@ -53,6 +54,11 @@ class InventoryFragment : Fragment() {
             intent.putExtra("EXTRA_LOCATION_HOME", plantList[position].location_home)
 
             startActivity(intent)
+        }
+
+        val fab: View = view.findViewById(R.id.fab)
+        fab.setOnClickListener { view ->
+            Toast.makeText(requireContext(), "Añadir planta", Toast.LENGTH_SHORT).show()
         }
 
         return view
