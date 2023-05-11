@@ -35,9 +35,24 @@ class LoginActivity : AppCompatActivity() {
         if (sharedPreferences.contains("username")) {
             sendLoginRequest(sharedPreferences.getString("username", ""), sharedPreferences.getString("password", ""), this)
         }
-
         setContentView(R.layout.activity_login)
+        //checkEula()
     }
+
+/*
+    private fun checkEula() {
+        val preferences = applicationContext
+            .getSharedPreferences("com.apm.plant_planner", Context.MODE_PRIVATE)
+        val eulaAccepted = preferences.getBoolean("eulaAccepted", false)
+        if (!eulaAccepted) {
+            val intent = Intent(this, EulaActivity::class.java)
+            val bundle = Bundle()
+            val eula = R.raw.eula
+            bundle.putInt("eula", eula)
+            intent.putExtras(bundle)
+            startActivityForResult(intent, 1)
+        }
+    } */
 
     override fun onResume() {
         if (themeHasChanged(this, "login")) {
