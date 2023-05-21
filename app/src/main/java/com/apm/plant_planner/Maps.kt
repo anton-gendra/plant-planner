@@ -1,28 +1,33 @@
 package com.apm.plant_planner
 
 import android.Manifest
-import android.content.ContentValues.TAG
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.util.Printer
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.apm.plant_planner.ui.PostFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.apm.plant_planner.R
-import com.google.android.gms.maps.*
+import org.json.JSONObject
 
 class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private lateinit var map: GoogleMap
+    private lateinit var btnSaveLocation:Button
+
+    private var new_marker:String = ""
+    private var title2:String = ""
 
     companion object{
         const val REQUEST_CODE_LOCATION=0
@@ -32,10 +37,39 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
         super.onCreate(savedInstanceState)
         // Retrieve the content view that renders the map.
         setContentView(R.layout.fragment_maps)
+        btnSaveLocation = findViewById<Button>(R.id.btnSaveLocation)
+        btnSaveLocation.setOnClickListener {
+            //Cada vez que pulsemos en el boton la var new_marker se vacia, y asi la siguiente vez
+            //que se pulse en el mapa sera para guardar la ubicacion seleccionada
+            new_marker = ""
+            if (::map.isInitialized) {
+                map.setOnMapClickListener {
+                    new_marker = "${it.longitude},${it.latitude}"
+                    save_marker()
+                }
+            }
+        }
+
 
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
+    }
+
+    private fun save_marker() {
+        //Add location to PostFragment
+        val bundle = Bundle()
+        title2 = intent.getStringExtra("title").toString()
+        Log.d("sacando titulooo", title.toString())
+        bundle.putString("location",new_marker)
+        bundle.putString("title",title2)
+
+        val postFragment = PostFragment()
+        postFragment.arguments = bundle
+        postFragment.updateTitleInView()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.mapFragment, postFragment)
+        transaction.commit()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -59,7 +93,7 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
                 map.animateCamera(CameraUpdateFactory.newLatLng(latlng));
 
                 val location = LatLng(latlng.latitude,latlng.longitude)
-                    map.addMarker(MarkerOptions()
+                map.addMarker(MarkerOptions()
                         .snippet(latlng.latitude.toString()+ " : " + latlng.longitude)
                         .title("Planta")
                         .position(location))
