@@ -12,8 +12,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.apm.plant_planner.LoginActivity
 import com.apm.plant_planner.Maps
 import com.apm.plant_planner.R
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,31 +77,36 @@ class PostFragment : Fragment() {
         val publishButton: Button = view.findViewById(R.id.publishButton)
         publishButton.setOnClickListener {
             Toast.makeText(context, "Title: $param2 - Location: $param1", Toast.LENGTH_SHORT).show()
-        }
-        // Inflate the layout for this fragment
-        //llamada al back! hacer en post con todos los datos, no aqui solo con las coordenadas
+            //llamada al back! hacer en post con todos los datos, no aqui solo con las coordenadas
 
-        /*if(new_marker.isNotEmpty()) {
-            val queue = Volley.newRequestQueue(this)
+
+            val queue = Volley.newRequestQueue(context)
             val url = "http://10.0.2.2:8000/plant/post"
 
             val body = JSONObject()
-            body.put("coordinates", new_marker)
+            body.put("title", param1)
+            body.put("location", param2)
+            body.put("image", "image1")
+            body.put("author", 1)
+
 
             val request = object: JsonObjectRequest(
                 Method.POST, url, body,
                 { response ->
 
-                    Toast.makeText(this, "Save coordinates: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Register data: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+
                 },
                 { error ->
-                    Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             ) {}
 
             queue.add(request)
+        }
+        // Inflate the layout for this fragment
 
-        }*/
+
         return view
     }
 
