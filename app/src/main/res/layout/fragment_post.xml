@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:text="camara"
+        app:layout_constraintBottom_toBottomOf="@+id/galeriaPost"
         app:layout_constraintEnd_toStartOf="@+id/editTextTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -68,7 +69,8 @@
         android:id="@+id/editTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="25dp"
         android:hint="Title..."
         android:scaleX="2"
         android:scaleY="2"
@@ -91,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.601" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
@@ -104,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/addLocationPost"
         app:layout_constraintTop_toBottomOf="@+id/addLocationPost"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.416" />
 
     <Button
         android:id="@+id/publishButton"
