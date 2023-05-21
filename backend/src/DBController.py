@@ -26,14 +26,15 @@ class DBController:
         self.connection.commit()
 
 
-    def create_post(self, author_id):
+    def create_post(self, post):
         query = """
-            INSERT INTO post(author, likes)
-            VALUES (%s, %s) RETURNING id;
+            INSERT INTO post(title, location, image, author)
+            VALUES (%s, %s, %s, %s) RETURNING id;
         """
         with self.connection.cursor() as cur:
             try: 
-                cur.execute(query, (author_id, 0))
+                """cur.execute(query, (author_id, 0))"""
+                cur.execute(query, (post.title, post.location, post.image, post.author))
 
             except psycopg2.Error as e:
                 print(f"\033[91mError happened while inserting post:\033[0m\n\nQuery:\n{query}\n\n{e}")

@@ -26,6 +26,12 @@ class RegisterUser(BaseModel):
     name: str
     password: str
 
+class CreatePost(BaseModel):
+    title: str
+    location: str
+    image: str
+    author: int
+
 @app.get("/")
 def info():
     return {'API_description': "Backend for the android plant-planner app."}
@@ -49,6 +55,11 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
 def register(user: RegisterUser):
     user_id = db.register_user(user)
     return {'status': "OK", 'detail': "User registered."}
+
+@app.post("/plant/post")
+def get_post(post: CreatePost):
+    post_id = db.create_post(post)
+        return {'status': "OK", 'detail': "Post created."}
 
 
 @app.post("/whatever")
