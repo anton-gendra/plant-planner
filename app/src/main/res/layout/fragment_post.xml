@@ -53,13 +53,13 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 
-    <TextView
-        android:id="@+id/textView3"
+    <EditText
+        android:id="@+id/editTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleX="2"
         android:scaleY="2"
-        android:text="Add new title..."
+        android:hint="Title..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,17 +82,17 @@
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="152dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Add Music"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintEnd_toEndOf="@+id/addLocationPost"
+        app:layout_constraintTop_toBottomOf="@+id/addLocationPost"
+        app:layout_constraintVertical_bias="0.163" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/publishButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"

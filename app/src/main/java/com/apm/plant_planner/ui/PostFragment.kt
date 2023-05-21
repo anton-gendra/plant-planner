@@ -1,5 +1,6 @@
 package com.apm.plant_planner.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import com.apm.plant_planner.Maps
 import com.apm.plant_planner.R
 
@@ -25,30 +29,82 @@ class PostFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var title: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            //getLocation of post plant
+            param1 = it.getString("location")
+            param2 = it.getString("title")
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_post, container, false)
 
+        val editTitle = view?.findViewById<EditText>(R.id.editTextTitle);
         view.findViewById<Button>(R.id.addLocationPost).setOnClickListener {
-            Log.d("btnSetup", "Selected")
-            view.context.startActivity(Intent(view.context, Maps::class.java))
+            val enteredTitle = editTitle?.text.toString().trim()
+            if(enteredTitle.isNotEmpty()) {
+                title = enteredTitle
+                Toast.makeText(context, "Title: $title - Location: $param1", Toast.LENGTH_SHORT).show()
+                val intent = Intent(view.context, Maps::class.java)
+                val bundle = Bundle()
+                bundle.putString("title", title)
+                intent.putExtras(bundle)
+                startActivity(intent)
+            } else {
+                Toast.makeText(context, "Ingrese un título válido", Toast.LENGTH_SHORT).show()
+            }
 
         }
+
+        val textViewName = view?.findViewById<TextView>(R.id.editTextTextPersonName3)
+        textViewName?.text = param1
+        val textTitle = view?.findViewById<TextView>(R.id.editTextTitle)
+        textTitle?.text = param2
+
+        val publishButton: Button = view.findViewById(R.id.publishButton)
+        publishButton.setOnClickListener {
+            Toast.makeText(context, "Title: $param2 - Location: $param1", Toast.LENGTH_SHORT).show()
+        }
         // Inflate the layout for this fragment
+        //llamada al back! hacer en post con todos los datos, no aqui solo con las coordenadas
+
+        /*if(new_marker.isNotEmpty()) {
+            val queue = Volley.newRequestQueue(this)
+            val url = "http://10.0.2.2:8000/plant/post"
+
+            val body = JSONObject()
+            body.put("coordinates", new_marker)
+
+            val request = object: JsonObjectRequest(
+                Method.POST, url, body,
+                { response ->
+
+                    Toast.makeText(this, "Save coordinates: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+                },
+                { error ->
+                    Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
+                }
+            ) {}
+
+            queue.add(request)
+
+        }*/
         return view
     }
 
+     fun updateTitleInView() {
+        val textViewTitle = view?.findViewById<TextView>(R.id.editTextTitle)
+        textViewTitle?.text = param2
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
