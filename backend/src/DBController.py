@@ -32,7 +32,7 @@ class DBController:
             VALUES (%s, %s, %s, %s) RETURNING id;
         """
         with self.connection.cursor() as cur:
-            try: 
+            try:
                 """cur.execute(query, (author_id, 0))"""
                 cur.execute(query, (post.title, post.location, post.image, post.author))
 

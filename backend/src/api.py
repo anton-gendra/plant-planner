@@ -59,7 +59,7 @@ def register(user: RegisterUser):
 @app.post("/plant/post")
 def get_post(post: CreatePost):
     post_id = db.create_post(post)
-    return {'status': "OK", 'detail': "Post created."}
+    return {'status': "OK", 'detail': "Post create -->>>>"}
 
 
 @app.post("/whatever")

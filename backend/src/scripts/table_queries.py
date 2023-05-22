@@ -9,9 +9,9 @@ QUERIES = [
     );""",
     """CREATE TABLE IF NOT EXISTS post (
         id SERIAL NOT NULL PRIMARY KEY,
-        title VARCHAR(32) NOT NULL,
-        location VARCHAR(32) NOT NULL,
-        image VARCHAR(32) NOT NULL,
+        title TEXT NOT NULL,
+        location TEXT NOT NULL,
+        image TEXT NOT NULL,
         author BIGINT NOT NULL REFERENCES user_profile(id)
     );""",
     """CREATE TABLE IF NOT EXISTS comment (
