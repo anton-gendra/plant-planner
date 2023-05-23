@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -38,8 +39,14 @@ class LoginActivity : AppCompatActivity() {
         if (sharedPreferences.contains("username")) {
             sendLoginRequest(sharedPreferences.getString("username", ""), sharedPreferences.getString("password", ""), this)
         }
+
+        supportActionBar?.hide()
+
         setContentView(R.layout.activity_login)
         checkEula()
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
     }
 
 

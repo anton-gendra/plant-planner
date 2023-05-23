@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Plantplanner_light_1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Plantplanner_light_1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/ice</item>
         <item name="colorPrimaryVariant">@color/blue_green_dark</item>
@@ -26,7 +26,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Theme.Plantplanner_light_2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Plantplanner_light_2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/ice2</item>
         <item name="colorPrimaryVariant">@color/blue_green_dark2</item>
@@ -49,7 +49,7 @@
     </style>
 
 
-    <style name="Theme.Plantplanner_dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Plantplanner_dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_ice</item>
         <item name="colorPrimaryVariant">@color/dark_blue_green_dark</item>
