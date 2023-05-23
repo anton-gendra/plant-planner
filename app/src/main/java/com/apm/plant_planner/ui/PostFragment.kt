@@ -73,6 +73,19 @@ class PostFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_post, container, false)
 
         val btnTakePhoto: Button? = view.findViewById(R.id.camaraPost)
+        if (btnTakePhoto != null) {
+            btnTakePhoto.visibility = View.GONE
+            if(param1 != null) {
+                btnTakePhoto.visibility = View.VISIBLE
+            }
+        };
+        val galeriaButton: Button? = view.findViewById(R.id.galeriaPost)
+        if (galeriaButton != null) {
+            galeriaButton.visibility = View.GONE
+            if(param1 != null) {
+                galeriaButton.visibility = View.VISIBLE
+            }
+        };
 
         // Boton para la camara
         if (btnTakePhoto != null) {
