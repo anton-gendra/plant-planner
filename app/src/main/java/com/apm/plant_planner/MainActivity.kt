@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.apm.plant_planner.ui.*
@@ -25,6 +26,12 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener(navListener)
         supportFragmentManager.beginTransaction().replace(R.id.navHostFragment,
             InventoryFragment()).commit()
+
+        // link settingsButton with Settings activity
+        val settingsBtn = findViewById<ImageButton>(R.id.settingsButton)
+        settingsBtn.setOnClickListener {
+            startActivity(Intent(this, Settings::class.java))
+        }
     }
 
     private val navListener = BottomNavigationView.OnNavigationItemSelectedListener {
