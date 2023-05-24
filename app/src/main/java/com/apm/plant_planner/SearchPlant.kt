@@ -1,14 +1,10 @@
 package com.apm.plant_planner
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.android.volley.DefaultRetryPolicy
@@ -17,10 +13,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.ui.PlantResponse
 import com.apm.plant_planner.ui.SearchFragment
-import com.apm.plant_planner.ui.SearchItems
-import com.google.android.material.search.SearchBar
 import com.google.gson.Gson
-import java.net.URL
 
 class SearchPlant : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

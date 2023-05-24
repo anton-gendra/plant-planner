@@ -1,17 +1,13 @@
 package com.apm.plant_planner.ui
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,8 +41,8 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         // Inicializa el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
-        val myList : List<SearchItems> = mutableListOf(
-            SearchItems("Nombre1", "Nombre2", "Nombre3", "Nombre4"),
+        val myList = listOf<SearchItem>(
+            SearchItem("Sin resultados")
         )
         // Crea el adaptador personalizado y asígnalo al RecyclerView
         adapter = SearchAdapter(myList)
