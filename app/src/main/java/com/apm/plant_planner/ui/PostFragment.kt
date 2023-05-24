@@ -2,6 +2,7 @@ package com.apm.plant_planner.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -127,8 +128,9 @@ class PostFragment : Fragment() {
                 base64Image = Base64.encodeToString(imageByteArray, Base64.DEFAULT)
 
             }
-
-            Toast.makeText(context, "Title: $param2 - Location: $param1", Toast.LENGTH_SHORT).show()
+            val sharedPreferences = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            val userId = sharedPreferences?.getInt("userid", 0)
+            Toast.makeText(context, "UserId: $userId - Title: $param2 - Location: $param1", Toast.LENGTH_SHORT).show()
 
             val queue = Volley.newRequestQueue(context)
             val url = "http://10.0.2.2:8000/plant/post"
@@ -137,7 +139,7 @@ class PostFragment : Fragment() {
             body.put("title", param2)
             body.put("location", param1)
             body.put("image", base64Image)
-            body.put("author", 1)
+            body.put("author", userId)
 
             val request = JsonObjectRequest(
                 Request.Method.POST, url, body,

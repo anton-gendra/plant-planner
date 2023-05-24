@@ -91,6 +91,7 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
             }
 
             Toast.makeText(context, "Login data: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+            sharedPreferences.edit().putInt("userid", JSONObject(response).getJSONObject("user").getInt("id")).apply()
 
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
