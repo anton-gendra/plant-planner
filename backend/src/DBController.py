@@ -96,7 +96,14 @@ class DBController:
         """
 
         return self.execute_single_query_get_all(query, ())
-    
+
+    def get_all_posts(self):
+        query = """
+            SELECT *
+            FROM post;
+        """
+
+        return self.execute_single_query_get_all(query, ())
 
     def remove_user(self, id):
         query = """

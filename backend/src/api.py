@@ -74,9 +74,9 @@ def create_post(author: int):
     return {'status': "OK", 'detail': "Post added."}
 
 
-@app.get("/post/{post_id}")
-def get_post(post_id: int):
-    return {'status': "OK", 'detail': "Not implemented yet."}
+@app.get("/plant/post")
+def get_all_post():
+    return db.get_all_posts()
 
 
 @app.get("/users")
