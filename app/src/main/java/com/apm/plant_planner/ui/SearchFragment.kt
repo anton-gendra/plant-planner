@@ -1,5 +1,6 @@
 package com.apm.plant_planner.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,32 +9,35 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
+import com.apm.plant_planner.model.PlantHomeLocation
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SearchAdapter
 
+    var plant_name: String? = null
+    var plant_type: String? = null
+    var bitmapFileName: String? = null
+    var location_home: PlantHomeLocation? = null
+    var mode: String? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        val bundle = arguments
+        if (bundle != null) {
+            plant_name = bundle.getString("plant_name")
+            plant_type = bundle.getString("plant_type")
+            bitmapFileName = bundle.getString("bitmapFileName")
+            location_home = bundle.getSerializable("location_home") as PlantHomeLocation?
+            mode = bundle.getString("mode")
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,8 +55,20 @@ class SearchFragment : Fragment() {
         adapter.setOnClickListener(object :
             SearchAdapter.OnClickListener {
             override fun onClick(position: Int, model: SearchItem) {
-                val plant_type = model.plantName
-                Toast.makeText(context, "Seleccionaste $plant_type", Toast.LENGTH_SHORT).show()
+                val new_plant_type = model.plantName
+                val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+                if (mode != null) {
+                    plant_type = new_plant_type
+                    intent.putExtra("EXTRA_MODE", mode)
+                    intent.putExtra("EXTRA_NAME", plant_name)
+                    intent.putExtra("EXTRA_TYPE", plant_type)
+                    intent.putExtra("EXTRA_BITMAP_FILE_NAME", bitmapFileName)
+                    intent.putExtra("EXTRA_LOCATION_HOME", location_home)
+                } else {
+                    intent.putExtra("EXTRA_MODE", "add")
+                    intent.putExtra("EXTRA_TYPE", new_plant_type)
+                }
+                startActivity(intent)
             }
         })
 
@@ -64,31 +80,23 @@ class SearchFragment : Fragment() {
         return view
     }
 
+    // si se cierra, volvemos a plantAtributes con los datos que teniamos
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+        intent.putExtra("EXTRA_MODE", mode)
+        intent.putExtra("EXTRA_NAME", plant_name)
+        intent.putExtra("EXTRA_TYPE", plant_type)
+        intent.putExtra("EXTRA_BITMAP_FILE_NAME", bitmapFileName)
+        intent.putExtra("EXTRA_LOCATION_HOME", location_home)
+        startActivity(intent)
+    }
+
     fun updateResults(newText: String?) {
         adapter.filter.filter(newText)
     }
 
     fun updatePlantList(plantList: List<String>) {
         adapter.updatePlantList(plantList)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

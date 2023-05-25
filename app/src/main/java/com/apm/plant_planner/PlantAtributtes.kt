@@ -74,7 +74,6 @@ class PlantAtributtes : AppCompatActivity() {
         mode = intent.getStringExtra("EXTRA_MODE")
 
         if (mode == "edit") {
-            Toast.makeText(this, "Edit plant", Toast.LENGTH_LONG).show()
             // change textView title
             findViewById<TextView>(R.id.textView).setText("Editar planta")
             findViewById<Button>(R.id.button4).setText("Guardar cambios")
@@ -131,7 +130,7 @@ class PlantAtributtes : AppCompatActivity() {
             intent.putExtra("EXTRA_MODE", mode)
             intent.putExtra("EXTRA_NAME", plantNameEditText.text.toString())
             intent.putExtra("EXTRA_TYPE", plantNameTextView.text.toString())
-            intent.putExtra("EXTRA_BITMAP", bitmap)
+            intent.putExtra("EXTRA_BITMAP_FILE_NAME", bitmapFileName)
             intent.putExtra("EXTRA_LOCATION_HOME", locationHomeSpinner.selectedItem as PlantHomeLocation)
             startActivity(intent)
         }

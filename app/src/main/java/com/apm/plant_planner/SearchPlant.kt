@@ -1,5 +1,6 @@
 package com.apm.plant_planner
 
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,11 +12,20 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.apm.plant_planner.model.PlantHomeLocation
 import com.apm.plant_planner.ui.PlantResponse
 import com.apm.plant_planner.ui.SearchFragment
 import com.google.gson.Gson
 
 class SearchPlant : AppCompatActivity() {
+
+    // atributos para recibir y devolver de plant attributes
+    var plant_name: String? = null
+    var plant_type: String? = null
+    var bitmapFileName: String? = null
+    var location_home: PlantHomeLocation? = null
+    var mode: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_plant)
@@ -71,12 +81,30 @@ class SearchPlant : AppCompatActivity() {
             }
         })
 
+        mode = intent.getStringExtra("EXTRA_MODE")
+        plant_name = intent.getStringExtra("EXTRA_NAME")
+        plant_type = intent.getStringExtra("EXTRA_TYPE")
+        bitmapFileName = intent.getStringExtra("EXTRA_BITMAP_FILE_NAME")
+        location_home = intent.getStringExtra("EXTRA_LOCATION_HOME") as PlantHomeLocation?
+
+        val fragment = SearchFragment()
+
+        val bundle = Bundle().apply {
+            putString("plant_name", plant_name)
+            putString("plant_type", plant_type)
+            putString("bitmapFileName", bitmapFileName)
+            putSerializable("location_home", location_home)
+            putString("mode", mode)
+        }
+
+        fragment.arguments = bundle
 
         supportFragmentManager.commit {
-            replace<SearchFragment>(R.id.frameContainer)
+            replace(R.id.frameContainer, fragment)
             setReorderingAllowed(true)
             addToBackStack("replacement")
         }
+
     }
 
 }
