@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.plant_planner.R
@@ -46,6 +47,15 @@ class SearchFragment : Fragment() {
         )
         // Crea el adaptador personalizado y asígnalo al RecyclerView
         adapter = SearchAdapter(myList)
+
+        adapter.setOnClickListener(object :
+            SearchAdapter.OnClickListener {
+            override fun onClick(position: Int, model: SearchItem) {
+                val plant_type = model.plantName
+                Toast.makeText(context, "Seleccionaste $plant_type", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         recyclerView.adapter = adapter
 
         // Configura el RecyclerView con un LayoutManager

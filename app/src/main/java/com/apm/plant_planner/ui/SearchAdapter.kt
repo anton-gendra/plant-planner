@@ -19,6 +19,18 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
 
         private var filteredList: List<SearchItem> = originalList.toList()
 
+        private var onClickListener: OnClickListener? = null
+
+        // onClickListener Interface
+        interface OnClickListener {
+            fun onClick(position: Int, model: SearchItem)
+        }
+
+        // A function to bind the onclickListener.
+        fun setOnClickListener(onClickListener: OnClickListener) {
+            this.onClickListener = onClickListener
+        }
+
         fun updatePlantList(plantList: List<String>) {
             this.plantList = plantList
         }
@@ -32,6 +44,11 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
         override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
             val item = filteredList[position]
             holder.create_items(item)
+            holder.itemView.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, item)
+                }
+            }
         }
 
         override fun getItemCount(): Int = filteredList.size

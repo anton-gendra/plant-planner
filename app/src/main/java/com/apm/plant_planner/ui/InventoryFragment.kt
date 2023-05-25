@@ -58,7 +58,8 @@ class InventoryFragment : Fragment() {
 
         val fab: View = view.findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Toast.makeText(requireContext(), "Añadir planta", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireActivity(), PlantAtributtes::class.java)
+            startActivity(intent)
         }
 
         return view

@@ -111,7 +111,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/emojione_1f331" />
 
     <Button
         android:id="@+id/button"
@@ -124,6 +124,17 @@
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plant_image" />
+
+    <Button
+        android:id="@+id/button_search"
+        android:layout_width="116dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="Change photo button"
+        android:text="@string/search_plant_type"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button" />
 
     <View
         android:id="@+id/divider"

@@ -24,7 +24,6 @@ class PlantAtributtes : AppCompatActivity() {
     var mode: String? = null
     var old_plant_name: String? = null
     var bitmap: Bitmap? = null
-    var imageHasChanged: Boolean = false
 
     var plant_name: String? = null
     var plant_type: String? = null
@@ -124,6 +123,17 @@ class PlantAtributtes : AppCompatActivity() {
         changepicBtn.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             resultLauncher.launch(cameraIntent)
+        }
+
+        val changePlantTypeBtn: Button = findViewById(R.id.button_search)
+        changePlantTypeBtn.setOnClickListener {
+            val intent = Intent(this, SearchPlant::class.java)
+            intent.putExtra("EXTRA_MODE", mode)
+            intent.putExtra("EXTRA_NAME", plantNameEditText.text.toString())
+            intent.putExtra("EXTRA_TYPE", plantNameTextView.text.toString())
+            intent.putExtra("EXTRA_BITMAP", bitmap)
+            intent.putExtra("EXTRA_LOCATION_HOME", locationHomeSpinner.selectedItem as PlantHomeLocation)
+            startActivity(intent)
         }
 
         val discardBtn: Button = findViewById(R.id.discard_btn)
