@@ -61,6 +61,15 @@ class DBController:
         return self.execute_single_query_one_result(query, [user_name])
     
 
+    def get_user_by_id(self, userid):
+        query = """
+            SELECT id, name, password
+            FROM user_profile
+            WHERE id=%s;
+        """
+
+        return self.execute_single_query_one_result(query, [userid])
+
     def register_user(self, user):
         query = """
             INSERT INTO user_profile(name, password)
@@ -100,7 +109,8 @@ class DBController:
     def get_all_posts(self):
         query = """
             SELECT *
-            FROM post;
+            FROM post
+            JOIN user_profile ON post.author = user_profile.id;
         """
 
         return self.execute_single_query_get_all(query, ())
