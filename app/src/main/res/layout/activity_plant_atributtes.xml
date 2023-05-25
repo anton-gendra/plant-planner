@@ -12,8 +12,8 @@
         android:layout_height="51dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="52dp"
-        android:contentDescription="Add plant button"
-        android:text="Add plant"
+        android:contentDescription="@string/add_plant_button"
+        android:text="@string/add_plant"
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
@@ -24,8 +24,8 @@
         android:layout_height="51dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
-        android:contentDescription="Discard button"
-        android:text="Discard"
+        android:contentDescription="@string/discard_button"
+        android:text="@string/cancel"
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Último riego"
+        android:text="@string/ltimo_riego"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Frecuencia de riego en días"
+        android:text="@string/frecuencia_de_riego"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
@@ -85,7 +85,7 @@
         android:layout_width="172dp"
         android:layout_height="37dp"
         android:layout_marginTop="24dp"
-        android:text="Añadir planta"
+        android:text="@string/add_plant"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +120,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:contentDescription="Change photo button"
-        android:text="Change photo"
+        android:text="@string/change_photo"
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plant_image" />
@@ -157,7 +157,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location at home*"
+        android:text="@string/location_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plant_image"
         app:layout_constraintTop_toBottomOf="@+id/plant_name" />
@@ -169,7 +169,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/name_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plant_image"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />

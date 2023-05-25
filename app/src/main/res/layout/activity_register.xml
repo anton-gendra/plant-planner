@@ -158,7 +158,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Birthday"
+        android:text="@string/birthday"
         app:layout_constraintBottom_toTopOf="@+id/editTextDate"
         app:layout_constraintStart_toStartOf="@+id/editTextDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
