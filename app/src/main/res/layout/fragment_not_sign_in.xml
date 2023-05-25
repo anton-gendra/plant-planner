@@ -16,7 +16,7 @@
             android:layout_width="364dp"
             android:layout_height="18dp"
             android:layout_marginTop="256dp"
-            android:text="Por favor, inicie sesión para acceder a esta funcionalidad"
+            android:text="@string/sign_in_alert"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/button_rounded"
-            android:text="Iniciar sesión"
+            android:text="@string/log_in_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />

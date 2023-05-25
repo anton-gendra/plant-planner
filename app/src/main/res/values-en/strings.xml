@@ -1,32 +1,76 @@
 <resources>
     <string name="app_name">Plant-planner</string>
+
+    <!-- Login activity -->
     <string name="user_label">User</string>
     <string name="password_label">Password</string>
     <string name="log_in_label">Log in</string>
     <string name="email_register_label">Register with Email</string>
     <string name="twitter_log_in_label">Login with twitter</string>
     <string name="google_log_in_label">Login with google</string>
+    <string name="entrar_sin_login">Enter without login</string>
+
+    <!-- Register activity -->
     <string name="name_label">Name</string>
     <string name="email_label">Email</string>
     <string name="repeat_password_label">Repeat password</string>
+    <string name="birthday">Birthday</string>
     <string name="accept_terms_label">I have read and accept the Privacy Policy.</string>
     <string name="register_label">Register</string>
+
+    <!-- Bottom navigation -->
     <string name="inventory">Inventory</string>
-    <string name="inventory_empty">Your inventory is empty!</string>
-    <string name="start_inventory">Start adding a plant, either by searching for it in a list or using your phone\'s camera.</string>
-    <string name="search_plant_type">Search for plant</string>
-    <string name="camera">Camera</string>
     <string name="calendar">Calendar</string>
+    <string name="camera">Camera</string>
     <string name="social">Social</string>
     <string name="profile">Profile</string>
 
+    <!-- Empty inventory fragment -->
+    <string name="inventory_empty">Your inventory is empty!</string>
+    <string name="start_inventory">Start adding a plant, either by searching for it in a list or using your phone\'s camera.</string>
+    <string name="search_plant_type">Search for plant</string>
+
+    <!-- Camera fragment -->
+    <string name="galeria">Gallery</string>
+    <string name="detectar_planta">Detect plant</string>
+
+    <!-- Social fragment -->
     <string name="search_friends">Friends</string>
 
+    <!-- Settings activity -->
     <string name="close_session">Close session</string>
-
     <string name="theme_light">Light theme 1</string>
     <string name="theme_light_1">Light theme 2</string>
     <string name="dark_theme">Dark theme</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dark_mode">Dark Mode</string>
+
+    <!-- Not sign in alert -->
+    <string name="sign_in_alert">Please, sign in to access this functionality</string>
+
+    <!-- Profile fragment -->
+    <string name="add_new_title">Add new title...</string>
+    <string name="add_location">Add Location</string>
+    <string name="john_doe">John Doe</string>
+    <string name="police_officer_at_nyc">Police Officer at NYC</string>
+    <string name="the_bronx_nyc">The Bronx, NYC</string>
+    <string name="followers">followers</string>
+    <string name="views">views</string>
+    <string name="settings">Settings</string>
+
+    <!-- Eula activity -->
+    <string name="end_user_license_agreement">End User License Agreement</string>
+
+    <!-- general -->
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+
+    <!-- Plant attributes activity -->
+    <string name="add_plant_button">Add plant button</string>
+    <string name="add_plant">Add plant</string>
+    <string name="discard_button">Discard button</string>
+    <string name="ltimo_riego">Last watering</string>
+    <string name="frecuencia_de_riego">Watering frequency</string>
+    <string name="change_photo">Change photo</string>
+    <string name="location_home">Location at home*</string>
+
 </resources>
