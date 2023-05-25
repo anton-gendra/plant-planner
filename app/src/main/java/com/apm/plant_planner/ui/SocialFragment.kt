@@ -3,6 +3,8 @@ package com.apm.plant_planner.ui
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,6 +32,8 @@ import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.IOException
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -90,6 +94,37 @@ class SocialFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_social, container, false)
     }
 
+        fun getAddressFromLocation(context: Context, locationString: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
+            val geocoder = Geocoder(context, Locale.getDefault())
+
+            val locationParts = locationString.split(",")
+            if (locationParts.size != 2) {
+                onError("Invalid location format. Expected format: 'latitude,longitude'")
+                return
+            }
+
+            val longitude = locationParts[0].toDoubleOrNull()
+            val latitude = locationParts[1].toDoubleOrNull()
+
+            if (latitude == null || longitude == null) {
+                onError("Invalid latitude or longitude")
+                return
+            }
+
+            try {
+                val addressList: List<Address> = geocoder.getFromLocation(latitude, longitude, 1) as List<Address>
+                if (addressList.isNotEmpty()) {
+                    val address: Address = addressList[0]
+                    val addressLine = address.getAddressLine(0)
+                    onSuccess(addressLine)
+                } else {
+                    onError("Address not found for the given location")
+                }
+            } catch (e: IOException) {
+                onError("Error fetching address: ${e.message}")
+            }
+        }
+
     fun processPostListString() {
         if (postListString != null) {
             println("sacon ifnomasd: " + postListString)
@@ -104,8 +139,23 @@ class SocialFragment : Fragment() {
                 val bitmap = array[3] as String
                 val author = array[6] as String
 
-                val post = Post(id, title, location, bitmap, author)
-                postList.add(post)
+                val address = getAddressFromLocation(
+                    requireContext(),
+                    locationString = location,
+                    onSuccess = { address ->
+                        // Aquí puedes utilizar la dirección obtenida
+                        println("Address: $address")
+                        val post = Post(id, title, address.toString(), bitmap, author)
+                        postList.add(post)
+                    },
+                    onError = { error ->
+                        // Aquí puedes manejar el error
+                        println("Error: $error")
+                    }
+                )
+                println("Addresasdfa sdafs s: $address")
+
+
             }
 
             println("sacon postsArray: " + jsonArray)

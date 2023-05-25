@@ -8,13 +8,10 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.plant_planner.R
-import org.w3c.dom.Text
-import java.io.File
 
 class PostAdapter(
     private val context: Context,
@@ -60,6 +57,10 @@ class PostAdapter(
             val imageByteArray = Base64.decode(p.bitmap, Base64.DEFAULT)
             val bitmap2 = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)
             if(bitmap2 == null) {
+                println("11111111111111111111111 21323232323")
+                val bitmapDefault = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
+                bitmapDefault.eraseColor(Color.TRANSPARENT)
+                images.add(bitmapDefault)
                 continue
             } else {
                 images.add(bitmap2)
@@ -68,14 +69,20 @@ class PostAdapter(
         holder.itemTitle.text=titles[position]
         holder.itemUser.text=users[position]
         holder.itemPosition.text=positions[position]
-        if (images.isNotEmpty() && position < images.size) {
+        if (images.isNotEmpty() && position < images.size && images[position] != null) {
+            println("11111111111111111111111")
+            println("11111111111111111111111")
+            println("11111111111111111111111")
             holder.itemImage.setImageBitmap(images[position])
         } else {
+            println("11111111111111111111111 22222222222222222222")
             holder.itemImage.setImageBitmap(null)  // Establecer el Bitmap como null
             holder.itemImage.setBackgroundColor(Color.TRANSPARENT)  // Establecer el color de fondo como transparente
         }
         //holder.itemImage.setImageBitmap(images[position])
     }
+
+
 
 
 }

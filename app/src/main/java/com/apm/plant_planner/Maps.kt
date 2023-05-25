@@ -101,11 +101,11 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
     }
 
     private fun createMarker() {
-        val sydney = LatLng(-33.852, 151.211)
+        val sydney = LatLng( 43.3352671, -8.4130433 )
         map.addMarker(
             MarkerOptions()
                 .position(sydney)
-                .title("Marker in Sydney")
+                .title("Marker in UDC")
                 .draggable(true)
         )
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
