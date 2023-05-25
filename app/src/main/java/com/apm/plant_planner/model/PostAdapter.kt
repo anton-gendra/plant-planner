@@ -3,6 +3,7 @@ package com.apm.plant_planner.model
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +55,7 @@ class PostAdapter(
         // check if plant name already exists
         for (p in posts) {
             titles.add(p.title)
-            users.add(p.author.toString())
+            users.add(p.author)
             positions.add(p.location.toString())
             val imageByteArray = Base64.decode(p.bitmap, Base64.DEFAULT)
             val bitmap2 = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)
@@ -67,7 +68,13 @@ class PostAdapter(
         holder.itemTitle.text=titles[position]
         holder.itemUser.text=users[position]
         holder.itemPosition.text=positions[position]
-        holder.itemImage.setImageBitmap(images[position])
+        if (images.isNotEmpty() && position < images.size) {
+            holder.itemImage.setImageBitmap(images[position])
+        } else {
+            holder.itemImage.setImageBitmap(null)  // Establecer el Bitmap como null
+            holder.itemImage.setBackgroundColor(Color.TRANSPARENT)  // Establecer el color de fondo como transparente
+        }
+        //holder.itemImage.setImageBitmap(images[position])
     }
 
 

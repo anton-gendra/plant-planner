@@ -5,5 +5,5 @@ data class Post (
     var title: String,
     var location: String? = null,
     var bitmap: String? = null,
-    var author: Double? = null
-)
+    var author: String
+    )

@@ -102,7 +102,7 @@ class SocialFragment : Fragment() {
                 val title = array[1] as String
                 val location = array[2] as String
                 val bitmap = array[3] as String
-                val author = array[4] as Double
+                val author = array[6] as String
 
                 val post = Post(id, title, location, bitmap, author)
                 postList.add(post)
@@ -130,7 +130,7 @@ class SocialFragment : Fragment() {
                 /*requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.navHostFragment, EmptyInventoryFragment())
                     .commit()*/
-                println("Social no vacío, mostrando social")
+                println("Social SI vacío, mostrando social")
                 println("DEBUG: post list: $postList")
 
 
@@ -171,7 +171,7 @@ class SocialFragment : Fragment() {
             },
             { error ->
                 // Llamar a la función onError con el mensaje de error
-                onError(error.toString())
+                onError(" HOLALALALA:::: $error.toString()")
             }
         )
 
