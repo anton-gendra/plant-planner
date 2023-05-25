@@ -8,16 +8,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
+import com.apm.plant_planner.model.PlantAdapter
 import com.apm.plant_planner.model.Post
+import com.apm.plant_planner.model.PostAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -33,7 +38,7 @@ import org.json.JSONObject
  */
 class SocialFragment : Fragment() {
 
-    var postList = emptyList<Post>()
+    val postList = mutableListOf<Post>()
     var postListString: String? = null
     var sharedPreferences: SharedPreferences? = null;
 
@@ -59,19 +64,19 @@ class SocialFragment : Fragment() {
                 Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
             }
         )
-
         view.findViewById<FloatingActionButton>(R.id.floatingActionButton8).setOnClickListener {
             Log.d("btnSetup", "Selected")
             view.context.startActivity(Intent(view.context, Post::class.java))
 
         }
 
-        val searchFriendsBtn: Button = view.findViewById(R.id.add_user_btn)
+        //NOT IMPLEMENTED
+        /*val searchFriendsBtn: Button = view.findViewById(R.id.add_user_btn)
         searchFriendsBtn.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.navHostFragment, SearchFriendsFragment())
             transaction.commit()
-        }
+        }*/
 
         val postButton: FloatingActionButton = view.findViewById(R.id.floatingActionButton8)
         postButton.setOnClickListener {
@@ -91,7 +96,6 @@ class SocialFragment : Fragment() {
             val gson = Gson()
             val jsonArray = gson.fromJson(postListString, Array<Array<Any>>::class.java)
 
-            val postList = mutableListOf<Post>()
 
             for (array in jsonArray) {
                 val id = array[0] as Double
@@ -128,10 +132,25 @@ class SocialFragment : Fragment() {
                     .commit()*/
                 println("Social no vacío, mostrando social")
                 println("DEBUG: post list: $postList")
+
+
             } else {
                 // si el inventario no esta vacío, mostramos el fragment de Inventory
                 println("Social no vacío, mostrando social")
                 println("DEBUG: post list: $postList")
+                val posts = view?.findViewById<RecyclerView>(R.id.recyclerView)
+                if (posts != null) {
+                    println("PRIMEROROROROROOR")
+                    posts.layoutManager = LinearLayoutManager(context)
+                } else {
+                    println("PRIMEROROROROROOR 11111111111")
+                }
+                if (posts != null) {
+                    println("PRIMEROROROROROOR 22222222222222222")
+                    posts.adapter = PostAdapter(requireContext(), postList)
+                } else {
+                    println("PRIMEROROROROROOR 333333333333333333333")
+                }
             }
         } else {
             // El resultado aún no está disponible
