@@ -53,7 +53,11 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
                         var listfiltered = mutableListOf<SearchItem>()
                         for (i in 0 until results.size) {
                             // Add a new SearchItem object to listfiltered for each plant in results
-                            listfiltered.add(SearchItem(plantName = results[i]))
+                            if (i <= 3){
+                                listfiltered.add(SearchItem(plantName = results[i]/*, plantImage = "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg"*/))
+                            } else{
+                                listfiltered.add(SearchItem(plantName = results[i]/*, plantImage = "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg"*/))
+                            }
                         }
 
                         // return the list of SearchItem objects
