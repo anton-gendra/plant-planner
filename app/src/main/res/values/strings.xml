@@ -77,6 +77,7 @@
     <string name="delete_plant_negative">No</string>
     <string name="save_changes">Guardar cambios</string>
     <string name="edit_plant">Editar planta</string>
+    <string name="introducir_planta_nombre">Nombre de la planta*</string>
 
     <!-- Search plant activity -->
     <string name="buscador_de_especies">Buscador de especies</string>

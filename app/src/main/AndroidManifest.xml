@@ -49,28 +49,13 @@
         </provider>
 
         <activity
-            android:name=".SearchFriends"
-            android:exported="false" />
-        <activity
             android:name=".Maps"
-            android:exported="false" />
-        <activity
-            android:name=".Profile"
-            android:exported="false" />
-        <activity
-            android:name=".Post"
             android:exported="false" />
         <activity
             android:name=".Settings"
             android:exported="false" />
         <activity
             android:name=".PlantAtributtes"
-            android:exported="false" />
-        <activity
-            android:name=".Inventory"
-            android:exported="false" />
-        <activity
-            android:name=".MapPicker"
             android:exported="false" />
         <activity
             android:name=".SearchPlant"

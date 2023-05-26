@@ -214,7 +214,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Nombre de la planta*"
+        android:text="@string/introducir_planta_nombre"
         app:layout_constraintStart_toStartOf="@+id/editTextPlantName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
