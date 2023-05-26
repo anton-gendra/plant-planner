@@ -20,6 +20,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.LoginActivity
+import com.apm.plant_planner.MainActivity
 import com.apm.plant_planner.Maps
 import com.apm.plant_planner.R
 import org.json.JSONObject
@@ -163,10 +164,8 @@ class PostFragment : Fragment() {
 
             queue.add(request)
 
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.navHostFragment, SocialFragment())
-            transaction?.disallowAddToBackStack()
-            transaction?.commit()
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
 
         }
 
