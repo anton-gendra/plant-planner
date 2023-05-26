@@ -105,7 +105,6 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
         body["username"] = username
         body["password"] = password
     }
-    Toast.makeText(context, "Login data: ".plus("111111111111111111111111"), Toast.LENGTH_SHORT).show()
 
     val request = object: StringRequest(
         Method.POST, url,
@@ -122,8 +121,7 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
                     apply()
                 }
             }
-
-            Toast.makeText(context, "Login data: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+             
             sharedPreferences.edit().putInt("userid", JSONObject(response).getJSONObject("user").getInt("id")).apply()
 
             val intent = Intent(context, MainActivity::class.java)
@@ -141,7 +139,6 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
             return body
         }
     }
-    Toast.makeText(context, "Login data: ".plus("222222222222222222"), Toast.LENGTH_SHORT).show()
 
     queue.add(request)
 }
