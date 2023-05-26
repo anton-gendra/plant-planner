@@ -50,7 +50,7 @@
     <string name="sign_in_alert">Please, sign in to access this functionality</string>
 
     <!-- Profile fragment -->
-    <string name="add_new_title">Add new title...</string>
+    <string name="add_new_title">Title...</string>
     <string name="add_location">Add Location</string>
     <string name="john_doe">John Doe</string>
     <string name="police_officer_at_nyc">Police Officer at NYC</string>
@@ -89,6 +89,8 @@
 
     <!-- general -->
     <string name="cancel">Cancel</string>
+    <string name="publish">Publish</string>
+    <string name="location">Location</string>
     <string name="accept">Accept</string>
     <string name="no_implementation">Not implemented yet</string>
     <string name="reject">Reject</string>
