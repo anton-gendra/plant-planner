@@ -73,4 +73,8 @@
     <string name="change_photo">Change photo</string>
     <string name="location_home">Location at home*</string>
 
+    <!-- Search plant activity -->
+    <string name="buscador_de_especies">Species search</string>
+    <string name="busca_aqui_especie">Search here</string>
+
 </resources>

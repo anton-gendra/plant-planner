@@ -37,6 +37,7 @@ class SearchPlant : AppCompatActivity() {
 
         val queue= Volley.newRequestQueue(this)
         var progressBar = findViewById<ProgressBar>(R.id.progressBar2)
+        var frameContainer = findViewById<View>(R.id.frameContainer)
         val url = "https://my-api.plantnet.org/v2/species?api-key=2b101nCSCBq24oD2NvMubv3gu"
 
         // Request a string response from the provided URL.
@@ -51,11 +52,13 @@ class SearchPlant : AppCompatActivity() {
                     it.scientificNameWithoutAuthor
                 }
                 progressBar?.visibility = View.GONE
+                frameContainer?.visibility = View.VISIBLE
                 val fragment = supportFragmentManager.findFragmentById(R.id.frameContainer) as SearchFragment
                 fragment.updatePlantList(searchItemsList)
             },
             Response.ErrorListener { error ->
                 progressBar?.visibility = View.GONE
+                frameContainer?.visibility = View.VISIBLE
                 println(error.toString())
                 //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
                 println("Error al realizar la petición")

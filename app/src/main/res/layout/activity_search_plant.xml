@@ -11,17 +11,19 @@ tools:context=".SearchPlant">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frameContainer"
-        android:layout_width="407dp"
+        android:name="com.apm.plant_planner.ui.SearchFragment"
+        android:layout_width="match_parent"
         android:layout_height="576dp"
-        android:layout_marginTop="24dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:layout="@layout/fragment_search" />
 
     <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
-    android:layout_width="410dp"
+    android:layout_width="match_parent"
     android:layout_height="153dp"
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
@@ -32,11 +34,11 @@ tools:context=".SearchPlant">
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="352dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginBottom="20dp"
         android:iconifiedByDefault="false"
-        android:queryHint="Cactus"
+        android:queryHint="Busca aquí tu especie"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -44,33 +46,20 @@ tools:context=".SearchPlant">
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.952" />
 
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="168dp"
-    android:layout_height="39dp"
-    android:layout_marginTop="48dp"
-    android:layout_marginBottom="14dp"
-    android:text="Find your plant!"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    app:layout_constraintBottom_toTopOf="@+id/searchView"
-    app:layout_constraintEnd_toStartOf="@+id/searchView2"
-    app:layout_constraintHorizontal_bias="0.553"
-    app:layout_constraintStart_toStartOf="@+id/toolbar"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="1.0" />
-
-<SearchView
-    android:id="@+id/searchView2"
-    android:layout_width="55dp"
-    android:layout_height="31dp"
-    android:layout_marginBottom="14dp"
-    app:layout_constraintBottom_toTopOf="@+id/searchView"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.915"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.783" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="14dp"
+        android:text="@string/buscador_de_especies"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/searchView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -80,7 +69,7 @@ tools:context=".SearchPlant">
         android:layout_marginTop="156dp"
         android:layout_marginEnd="136dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

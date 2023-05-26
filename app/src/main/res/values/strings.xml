@@ -73,4 +73,8 @@
     <string name="change_photo">Cambiar foto</string>
     <string name="location_home">Ubicación en casa</string>
 
+    <!-- Search plant activity -->
+    <string name="buscador_de_especies">Buscador de especies</string>
+    <string name="busca_aqui_especie">Busca aquí tu especie</string>
+
 </resources>
