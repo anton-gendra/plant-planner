@@ -48,13 +48,15 @@ class SocialFragment : Fragment() {
 
         val sharedPreferences = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         if (!sharedPreferences.contains("username")) {
-            // si el inventario esta vacío, mostramos el fragment de EmptyInventory
+            // Si el inventario está vacío, mostramos el fragmento NotSignInFragment
+            val fragment = NotSignInFragment()
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.navHostFragment, NotSignInFragment())
+                .replace(R.id.navHostFragment, fragment)
+                .remove(this)
                 .commit()
         }
-
     }
+
     val postList = mutableListOf<Post>()
     var postListString: String? = null
     var sharedPreferences: SharedPreferences? = null;
@@ -62,46 +64,54 @@ class SocialFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_social, container, false)
-        sharedPreferences = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val sharedPreferences1 = requireContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
 
-        getPlantPosts(
-            view.context,
-            { response ->
-                // Manejar la respuesta exitosa aquí
-                postListString = response.toString()
+        if (sharedPreferences1.contains("username")) {
 
-                Toast.makeText(context, "Get data: " + response.toString(), Toast.LENGTH_SHORT).show()
-                processPostListString()
-            },
-            { error ->
-                // Manejar el error aquí
-                println(error)
-                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+
+            // Inflate the layout for this fragment
+            val view: View = inflater.inflate(R.layout.fragment_social, container, false)
+            sharedPreferences = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+
+            getPlantPosts(
+                view.context,
+                { response ->
+                    // Manejar la respuesta exitosa aquí
+                    postListString = response.toString()
+
+                    Toast.makeText(context, "Get data: " + response.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                    processPostListString()
+                },
+                { error ->
+                    // Manejar el error aquí
+                    println(error)
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                }
+            )
+            view.findViewById<FloatingActionButton>(R.id.floatingActionButton8).setOnClickListener {
+                Log.d("btnSetup", "Selected")
+                view.context.startActivity(Intent(view.context, Post::class.java))
+
             }
-        )
-        view.findViewById<FloatingActionButton>(R.id.floatingActionButton8).setOnClickListener {
-            Log.d("btnSetup", "Selected")
-            view.context.startActivity(Intent(view.context, Post::class.java))
 
-        }
-
-        //NOT IMPLEMENTED
-        /*val searchFriendsBtn: Button = view.findViewById(R.id.add_user_btn)
+            //NOT IMPLEMENTED
+            /*val searchFriendsBtn: Button = view.findViewById(R.id.add_user_btn)
         searchFriendsBtn.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.navHostFragment, SearchFriendsFragment())
             transaction.commit()
         }*/
 
-        val postButton: FloatingActionButton = view.findViewById(R.id.floatingActionButton8)
-        postButton.setOnClickListener {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.navHostFragment, PostFragment())
-            transaction.commit()
-        }
+            val postButton: FloatingActionButton = view.findViewById(R.id.floatingActionButton8)
+            postButton.setOnClickListener {
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.navHostFragment, PostFragment())
+                transaction.commit()
+            }
 
+            return view;
+        }
         return view;
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_social, container, false)

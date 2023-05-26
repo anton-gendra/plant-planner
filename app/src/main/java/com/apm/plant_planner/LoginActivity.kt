@@ -98,13 +98,14 @@ class LoginActivity : AppCompatActivity() {
 
 fun sendLoginRequest(username: String?, password: String?, context: Context) {
     val queue = Volley.newRequestQueue(context)
-    val url = "http://10.0.2.2:14000/user/login"
+    val url = "http://10.0.2.2:8000/user/login"
 
     val body = HashMap<String, String>()
     if (username != null && password != null) {
         body["username"] = username
         body["password"] = password
     }
+    Toast.makeText(context, "Login data: ".plus("111111111111111111111111"), Toast.LENGTH_SHORT).show()
 
     val request = object: StringRequest(
         Method.POST, url,
@@ -140,6 +141,7 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
             return body
         }
     }
+    Toast.makeText(context, "Login data: ".plus("222222222222222222"), Toast.LENGTH_SHORT).show()
 
     queue.add(request)
 }
