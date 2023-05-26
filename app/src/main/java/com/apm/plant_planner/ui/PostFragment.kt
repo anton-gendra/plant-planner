@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -23,8 +25,12 @@ import com.apm.plant_planner.LoginActivity
 import com.apm.plant_planner.MainActivity
 import com.apm.plant_planner.Maps
 import com.apm.plant_planner.R
+import com.apm.plant_planner.model.Post
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.util.*
+import kotlin.collections.HashMap
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -117,7 +123,24 @@ class PostFragment : Fragment() {
         }
 
         val textViewName = view?.findViewById<TextView>(R.id.editTextTextPersonName3)
-        textViewName?.text = param1
+
+            val address = getAddressFromLocation(
+                requireContext(),
+                locationString = param1.toString(),
+                onSuccess = { address ->
+                    // Aquí puedes utilizar la dirección obtenida
+                    println("Address: $address")
+                    textViewName?.text = address
+
+                },
+                onError = { error ->
+                    println("Error: $error")
+                }
+            )
+            println("Addresasdfa sdafs s: $address")
+
+
+
         val textTitle = view?.findViewById<TextView>(R.id.editTextTitle)
         textTitle?.text = param2
 
@@ -169,6 +192,37 @@ class PostFragment : Fragment() {
 
         }
 
+    fun getAddressFromLocation(context: Context, locationString: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
+        val geocoder = Geocoder(context, Locale.getDefault())
+
+        val locationParts = locationString.split(",")
+        if (locationParts.size != 2) {
+            onError("Invalid location format. Expected format: 'latitude,longitude'")
+            return
+        }
+
+        val longitude = locationParts[0].toDoubleOrNull()
+        val latitude = locationParts[1].toDoubleOrNull()
+
+        if (latitude == null || longitude == null) {
+            onError("Invalid latitude or longitude")
+            return
+        }
+
+        try {
+            val addressList: List<Address> = geocoder.getFromLocation(latitude, longitude, 1) as List<Address>
+            if (addressList.isNotEmpty()) {
+                val address: Address = addressList[0]
+                val addressLine = address.getAddressLine(0)
+                onSuccess(addressLine)
+            } else {
+                onError("Address not found for the given location")
+            }
+        } catch (e: IOException) {
+            onError("Error fetching address: ${e.message}")
+        }
+    }
+
         //AQUI COJO EL BASE64 DE LA BD Y MUESTRA LA IMAGEN EN EL OBJ XML DE IMAGEVIEW
         //HACERLO EN SOCIAL
         /*val imageByteArray = Base64.decode(base64Image, Base64.DEFAULT)
@@ -180,6 +234,37 @@ class PostFragment : Fragment() {
 
 
         return view
+    }
+
+    fun getAddressFromLocation(context: Context, locationString: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
+        val geocoder = Geocoder(context, Locale.getDefault())
+
+        val locationParts = locationString.split(",")
+        if (locationParts.size != 2) {
+            onError("Invalid location format. Expected format: 'latitude,longitude'")
+            return
+        }
+
+        val longitude = locationParts[0].toDoubleOrNull()
+        val latitude = locationParts[1].toDoubleOrNull()
+
+        if (latitude == null || longitude == null) {
+            onError("Invalid latitude or longitude")
+            return
+        }
+
+        try {
+            val addressList: List<Address> = geocoder.getFromLocation(latitude, longitude, 1) as List<Address>
+            if (addressList.isNotEmpty()) {
+                val address: Address = addressList[0]
+                val addressLine = address.getAddressLine(0)
+                onSuccess(addressLine)
+            } else {
+                onError("Address not found for the given location")
+            }
+        } catch (e: IOException) {
+            onError("Error fetching address: ${e.message}")
+        }
     }
 
      fun updateTitleInView() {

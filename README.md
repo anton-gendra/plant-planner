@@ -19,7 +19,10 @@ Principalmente, Plant Planner utiliza las siguientes tecnologías:
 
 ## BackEnd
 
-**TODO: Explicar como se levanta el BackEnd**
+Desde la carpeta de backend/, que se encuentra en el root del proyecto, se encuentran los ficheros Dockerfile y docker-compose.yml. Desde este directorio, se ejecutará el típico comando para levantar contenedores de docker mediante docker-compose: `docker-compose up`. Es relecante mencionar que primero se debe levantar el contenedor de base de datos y posteriormente el de la aplicación. En caso de que ocurra algún error, es importante considerar que esta puede ser una de las causas.
+Después de haber realizado este paso, se deben crear las bases de datos que usará la aplicación. Por cuestión de tiempo esto quedó implementado de una manera un tanto rudimentaria. El proceso para eso sería el siguiente:
+- Entrar en el docker de la aplicación: `docker exec -it backend-plant-planner-backend-1 bash`
+- Ejecutar el script de creación de tablas: `python app/scripts/create_tables.py`
 
 ## Demos de los prototipos
 
