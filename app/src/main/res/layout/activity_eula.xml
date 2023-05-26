@@ -16,7 +16,7 @@
             android:id="@+id/eula_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/cancel" />
+            android:text="@string/reject" />
 
         <TextView
             android:id="@+id/header_text"

@@ -90,6 +90,7 @@
     <!-- general -->
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="reject">Rechazar</string>
     <string name="no_implementation">No implementado</string>
 
 </resources>

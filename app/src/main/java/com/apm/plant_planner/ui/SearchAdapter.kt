@@ -3,13 +3,9 @@ package com.apm.plant_planner.ui;
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.RequestQueue
@@ -36,7 +32,6 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
             fun onClick(position: Int, model: SearchItem)
         }
 
-        // A function to bind the onclickListener.
         fun setOnClickListener(onClickListener: OnClickListener) {
             this.onClickListener = onClickListener
         }
@@ -72,11 +67,9 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
                     filteredList = if (searchText.isEmpty() || plantList.isEmpty()) {
                         originalList.toList()
                     } else {
-                        // get first 4 plants from plantList using the filter text
                         val results = plantList.filter {
                             it.lowercase(Locale.ROOT).contains(searchText)
                         }
-
                         // create a list of SearchItem objects from the results list
                         var listfiltered = mutableListOf<SearchItem>()
                         for (i in 0 until results.size) {
