@@ -47,7 +47,7 @@ class SearchFragment : Fragment() {
         // Inicializa el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
         val myList = listOf<SearchItem>(
-            SearchItem("Sin resultados"/*, "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg"*/)
+            SearchItem("Sin resultados", "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg")
         )
         // Crea el adaptador personalizado y asígnalo al RecyclerView
         adapter = SearchAdapter(myList)

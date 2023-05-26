@@ -7,9 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.DefaultRetryPolicy
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
+import com.google.gson.Gson
 import java.util.Locale
 
 class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.Adapter<SearchViewHolder>(),
@@ -20,6 +28,8 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
         private var filteredList: List<SearchItem> = originalList.toList()
 
         private var onClickListener: OnClickListener? = null
+
+        var queue: RequestQueue? = null
 
         // onClickListener Interface
         interface OnClickListener {
@@ -36,6 +46,7 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+            queue = Volley.newRequestQueue(parent.context)
             val itemView = LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
             return SearchViewHolder(itemView)
             // Aquí puedes inflar el diseño de cada elemento de la lista y devolver una instancia de MyViewHolder
@@ -70,10 +81,33 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
                         var listfiltered = mutableListOf<SearchItem>()
                         for (i in 0 until results.size) {
                             // Add a new SearchItem object to listfiltered for each plant in results
-                            if (i <= 3){
-                                listfiltered.add(SearchItem(plantName = results[i]/*, plantImage = "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg"*/))
+                            if (i <= 2){
+
+                                val url = "https://serpapi.com/search.json?q="+results[i]+"&engine=google_images&ijn=0&api_key=950e962b443b33032fb39a8002b2c4111245b51d76329042f50953cd995a2777"
+
+                                // Request a string response from the provided URL.
+                                val stringRequest = object : StringRequest(
+                                    Method.GET, url,
+                                    Response.Listener { response ->
+                                        //println("Response is: $response")
+                                        val gson = Gson()
+                                        //GET THE URL of the "thumbnail": "<URL to image>" field of the json
+                                        response.toString().substringAfter("thumbnail\": \"").substringBefore("\"").let {
+                                            println(it)
+                                            listfiltered.add(SearchItem(plantName = results[i], plantImage = it))
+                                        }
+                                    },
+                                    Response.ErrorListener { error ->
+                                        println(error.toString())
+                                        //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
+                                        println("Error al realizar la petición")
+                                    }
+                                ) {
+                                }
+                                stringRequest.retryPolicy = DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+                                queue?.add(stringRequest)
                             } else{
-                                listfiltered.add(SearchItem(plantName = results[i]/*, plantImage = "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg"*/))
+                                listfiltered.add(SearchItem(plantName = results[i], plantImage = "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg"))
                             }
                         }
 
