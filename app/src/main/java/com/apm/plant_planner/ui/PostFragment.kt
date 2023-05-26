@@ -164,7 +164,7 @@ class PostFragment : Fragment() {
             queue.add(request)
 
             val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.postLayout, SocialFragment())
+            transaction?.replace(R.id.navHostFragment, SocialFragment())
             transaction?.disallowAddToBackStack()
             transaction?.commit()
 
