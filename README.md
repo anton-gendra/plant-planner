@@ -6,6 +6,8 @@
 
 Plant Planner es una aplicación móvil para Android que te permitirá gestionar tus plantas y compartirlas con tus amigos. Entre sus funciones más destacadas están la detección del tipo de planta mediante técnicas de IA, la gestión de las plantas y una red social integrada al estilo instagram, pero centrada en tus plantas y las de tus amigos. Con ello, se busca que el cuidado de las plantas sea más sencillo y divertido para todo el mundo.
 
+En la **Wiki** de este repositorio se encuentra una entrada para cada tarea semanal de la práctica, además de este Readme con información más general sobre la aplicación.
+
 ## Tecnologías
 
 Principalmente, Plant Planner utiliza las siguientes tecnologías:
