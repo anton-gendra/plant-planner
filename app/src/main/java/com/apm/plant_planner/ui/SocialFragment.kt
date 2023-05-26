@@ -213,7 +213,7 @@ class SocialFragment : Fragment() {
         val baseUrl = "http://10.0.2.2:8000"
         val url = "$baseUrl/plant/post"
 
-        val request = JsonArrayRequest(
+        val request = object: JsonArrayRequest(
             Request.Method.GET, url, null,
             { response ->
                 // Llamar a la función onResponse con la respuesta exitosa
@@ -223,7 +223,15 @@ class SocialFragment : Fragment() {
                 // Llamar a la función onError con el mensaje de error
                 onError(" HOLALALALA:::: $error.toString()")
             }
-        )
+        ){
+            override fun getHeaders(): MutableMap<String, String> {
+                val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+                val token = sharedPreferences.getString("token", "")
+                val headers = HashMap<String, String>()
+                headers["Authorization"] = "Bearer ".plus(token)
+                return headers
+            }
+        }
 
         queue.add(request)
     }

@@ -32,6 +32,23 @@ class CreatePost(BaseModel):
     image: str
     author: int
 
+
+
+
+def authenticate(request: Request):
+    token = request.headers.get("Authorization")
+    token_splited = token.split("Bearer ")
+    if len(token_splited) < 2:
+        raise HTTPException(403, "Unable to authenticate")
+    actual_token = token_splited[1]
+    user_id = session_manager.get_logged_user(actual_token)
+
+    if not user_id:
+        raise HTTPException(403, "Unable to authenticate")
+    
+    return user_id
+
+
 @app.get("/")
 def info():
     return {'API_description': "Backend for the android plant-planner app."}
@@ -43,7 +60,7 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     user = User(id=raw_user[0], name=raw_user[1], password=raw_user[2])
     if user.password == form_data.password or (form_data.username.lower() == 'admin' and form_data.password.lower() == 'admin'):
         if form_data.username.lower() == 'admin' and form_data.password.lower() == 'admin':
-            return {'access_token': session_manager.new_session(-1), 'token_type': "bearer"}
+            return {'user': user, 'access_token': session_manager.new_session(-1), 'token_type': "bearer"}
         
         return {'user': user, 'access_token': session_manager.new_session(user.id), 'token_type': "bearer"}
     
@@ -57,25 +74,15 @@ def register(user: RegisterUser):
     return {'status': "OK", 'detail': "User registered."}
 
 @app.post("/plant/post")
-def get_post(post: CreatePost):
+def get_post(post: CreatePost, request: Request):
+    authenticate(request)
     post_id = db.create_post(post)
     return {'status': "OK", 'detail': "Post create -->>>>"}
 
 
-@app.post("/whatever")
-def whatever(token: Annotated[str, Depends(oauth2_scheme)]):
-    return {"token": token}
-
-
-@app.put("/post/create")
-def create_post(author: int):
-    db.create_post(author)
-
-    return {'status': "OK", 'detail': "Post added."}
-
-
 @app.get("/plant/post")
-def get_all_post():
+def get_all_post(request: Request):
+    authenticate(request)
     return db.get_all_posts()
 
 

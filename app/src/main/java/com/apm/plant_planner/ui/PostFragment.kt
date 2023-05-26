@@ -141,15 +141,23 @@ class PostFragment : Fragment() {
             body.put("image", base64Image)
             body.put("author", userId)
 
-            val request = JsonObjectRequest(
-                Request.Method.POST, url, body,
+            val request = object: JsonObjectRequest(
+                Method.POST, url, body,
                 { response ->
                     Toast.makeText(context, "Post data: " + response.toString(), Toast.LENGTH_SHORT).show()
                 },
                 { error ->
                     Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
                 }
-            )
+            ) {
+                override fun getHeaders(): MutableMap<String, String> {
+                    val sharedPreferences = activity?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+                    val token = sharedPreferences?.getString("token", "")
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = "Bearer ".plus(token)
+                    return headers
+                }
+            }
 
             queue.add(request)
 
