@@ -26,5 +26,6 @@
         android:contentDescription="Submit"
         android:layout_margin="16dp"
         app:backgroundTint="@color/ice"
+        android:tint="@android:color/black"
         />
 </FrameLayout>

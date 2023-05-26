@@ -117,6 +117,7 @@ class CameraFragment : Fragment() {
         val viewLoc = inflater.inflate(R.layout.fragment_camera, container, false)
         view = viewLoc // la global para el result launches
         val btnTakePhoto: Button = viewLoc.findViewById(R.id.btnTakePhoto)
+        val btnGallery: Button = viewLoc.findViewById(R.id.galeria)
         val btnDetectar: Button = viewLoc.findViewById(R.id.detectar)
 
         progressBar = view?.findViewById<ProgressBar>(R.id.progressBar)
@@ -126,6 +127,10 @@ class CameraFragment : Fragment() {
         btnTakePhoto.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             resultLauncher.launch(cameraIntent)
+        }
+
+        btnGallery.setOnClickListener {
+            Toast.makeText(requireContext(), R.string.no_implementation, Toast.LENGTH_SHORT).show()
         }
 
         // Boton para enviar imagen

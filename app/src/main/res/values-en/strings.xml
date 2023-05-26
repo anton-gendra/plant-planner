@@ -17,6 +17,8 @@
     <string name="birthday">Birthday</string>
     <string name="accept_terms_label">I have read and accept the Privacy Policy.</string>
     <string name="register_label">Register</string>
+    <string name="correct_register">Successfully registered.</string>
+    <string name="pass_not_match">Passwords do not match.</string>
 
     <!-- Bottom navigation -->
     <string name="inventory">Inventory</string>
@@ -60,10 +62,6 @@
     <!-- Eula activity -->
     <string name="end_user_license_agreement">End User License Agreement</string>
 
-    <!-- general -->
-    <string name="cancel">Cancel</string>
-    <string name="accept">Accept</string>
-
     <!-- Plant attributes activity -->
     <string name="add_plant_button">Add plant button</string>
     <string name="add_plant">Add plant</string>
@@ -81,5 +79,10 @@
     <string name="no_events_today">No events today! Rest and watch your plants grow.</string>
     <string name="no_events_past">No events planned for %1$s day</string>
     <string name="no_events_future">For day %1$s nothing planned</string>
+
+    <!-- general -->
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="no_implementation">Not implemented yet</string>
 
 </resources>

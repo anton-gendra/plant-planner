@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
 
             } else {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.pass_not_match, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -72,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun register(view: View) {
-        Toast.makeText(applicationContext, "Successfully registered.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, R.string.correct_register, Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)

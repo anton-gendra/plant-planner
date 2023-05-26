@@ -72,7 +72,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun register(view: View) {
-        Toast.makeText(applicationContext, "DEBUG: Register.", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 
@@ -84,11 +83,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun logInTwitter(view: View) {
-        Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, R.string.no_implementation, Toast.LENGTH_SHORT).show()
     }
 
     fun logInGoogle(view: View) {
-        Toast.makeText(applicationContext, "Not implemented yet.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, R.string.no_implementation, Toast.LENGTH_SHORT).show()
     }
 
     fun enterWithoutLogin(view: View) {
