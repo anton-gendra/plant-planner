@@ -20,28 +20,27 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-
-
+        // revisamos si la sesion esta iniciada
+        val sharedPref = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         val logOutBtn: Button = findViewById(R.id.close_session_btn)
-        logOutBtn.setOnClickListener {
-            val sharedPref = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-            with (sharedPref.edit()) {
-                remove("username")
-                remove("password")
-                remove("eulaAccepted")
-                apply()
+
+        if (sharedPref.contains("username")) {
+            logOutBtn.setOnClickListener {
+                with (sharedPref.edit()) {
+                    remove("username")
+                    remove("password")
+                    // remove("eulaAccepted") TODO: no haria falta, pero revisar
+                    apply()
+                }
+                Toast.makeText(this, "Closing session", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
             }
-
-
-            Toast.makeText(this, "Closing session", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, LoginActivity::class.java))
+        } else {
+            logOutBtn.text = getString(R.string.log_in_label)
+            logOutBtn.setOnClickListener {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
         }
-
-
-
-
-
-
 
         val switchDarkMode: SwitchCompat = findViewById(R.id.theme_switch)
         switchDarkMode.setOnClickListener {
