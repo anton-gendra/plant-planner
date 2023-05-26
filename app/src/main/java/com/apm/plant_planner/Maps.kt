@@ -66,6 +66,7 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
         val postFragment = PostFragment()
         postFragment.arguments = bundle
         postFragment.updateTitleInView()
+        btnSaveLocation.visibility = Button.GONE
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.mapFragment, postFragment)
         transaction.commit()
