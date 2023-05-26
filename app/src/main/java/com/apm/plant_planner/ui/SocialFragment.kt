@@ -79,8 +79,6 @@ class SocialFragment : Fragment() {
                     // Manejar la respuesta exitosa aquí
                     postListString = response.toString()
 
-                    Toast.makeText(context, "Get data: " + response.toString(), Toast.LENGTH_SHORT)
-                        .show()
                     processPostListString()
                 },
                 { error ->
