@@ -110,7 +110,6 @@ class PostFragment : Fragment() {
             val enteredTitle = editTitle?.text.toString().trim()
             if(enteredTitle.isNotEmpty()) {
                 title = enteredTitle
-                Toast.makeText(context, "Title: $title - Location: $param1", Toast.LENGTH_SHORT).show()
                 val intent = Intent(view.context, Maps::class.java)
                 val bundle = Bundle()
                 bundle.putString("title", title)
@@ -156,7 +155,6 @@ class PostFragment : Fragment() {
             }
             val sharedPreferences = context?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
             val userId = sharedPreferences?.getInt("userid", 0)
-            Toast.makeText(context, "UserId: $userId - Title: $param2 - Location: $param1", Toast.LENGTH_SHORT).show()
 
             val queue = Volley.newRequestQueue(context)
             val url = "http://10.0.2.2:8000/plant/post"
@@ -170,7 +168,7 @@ class PostFragment : Fragment() {
             val request = object: JsonObjectRequest(
                 Method.POST, url, body,
                 { response ->
-                    Toast.makeText(context, "Post data: " + response.toString(), Toast.LENGTH_SHORT).show()
+                    println("Post data: " + response.toString())
                 },
                 { error ->
                     Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
