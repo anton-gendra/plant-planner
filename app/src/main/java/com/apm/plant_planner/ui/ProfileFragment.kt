@@ -2,12 +2,14 @@ package com.apm.plant_planner.ui
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.apm.plant_planner.PlantAtributtes
 import com.apm.plant_planner.R
@@ -39,5 +41,16 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sPref: SharedPreferences? = activity?.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val username = sPref?.getString("username", "")
+        if (username != "") {
+            val usernameDisplay: TextView? = activity?.findViewById(R.id.username_text)
+            usernameDisplay?.text = username
+        }
     }
 }
