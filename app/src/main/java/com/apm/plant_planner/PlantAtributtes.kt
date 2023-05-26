@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.apm.plant_planner.model.Plant
 import com.apm.plant_planner.model.PlantHomeLocation
+import com.apm.plant_planner.utils.setNewTheme
 import com.google.gson.Gson
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -67,6 +68,7 @@ class PlantAtributtes : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setNewTheme(this, "plantAtributtes")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_atributtes)
 

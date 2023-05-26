@@ -25,7 +25,7 @@
         android:src="@android:drawable/ic_menu_add"
         android:contentDescription="Submit"
         android:layout_margin="16dp"
-        app:backgroundTint="@color/ice"
+        android:background="?attr/colorPrimary"
         android:tint="@android:color/black"
         />
 </FrameLayout>

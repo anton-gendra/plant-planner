@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.model.PlantHomeLocation
 import com.apm.plant_planner.ui.PlantResponse
 import com.apm.plant_planner.ui.SearchFragment
+import com.apm.plant_planner.utils.setNewTheme
 import com.google.gson.Gson
 
 class SearchPlant : AppCompatActivity() {
@@ -27,6 +28,7 @@ class SearchPlant : AppCompatActivity() {
     var mode: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setNewTheme(this, "searchPlant")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_plant)
 
