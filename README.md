@@ -1,5 +1,23 @@
 # Plant Planner
 
+<p align="center">
+  <img src="https://github.com/anton-gendra/plant-planner/assets/78569753/18fe0fa8-d716-433a-bed1-34d29fe6246f" alt="Logo de la aplicación" width="128" height="128">
+</p>
+
+Plant Planner es una aplicación móvil para Android que te permitirá gestionar tus plantas y compartirlas con tus amigos. Entre sus funciones más destacadas están la detección del tipo de planta mediante técnicas de IA, la gestión de las plantas y una red social integrada al estilo instagram, pero centrada en tus plantas y las de tus amigos. Con ello, se busca que el cuidado de las plantas sea más sencillo y divertido para todo el mundo.
+
+## Tecnologías
+
+Principalmente, Plant Planner utiliza las siguientes tecnologías:
+
+* [Kotlin](https://kotlinlang.org/)
+* [Python](https://www.python.org/downloads/)
+* [FastAPI](https://fastapi.tiangolo.com/)
+* [Docker](https://www.docker.com/)
+
+## BackEnd
+
+**TODO: Explicar como se levanta el BackEnd**
 
 ## Demos de los prototipos
 
