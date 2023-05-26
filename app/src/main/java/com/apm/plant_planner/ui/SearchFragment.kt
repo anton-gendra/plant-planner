@@ -80,18 +80,6 @@ class SearchFragment : Fragment() {
         return view
     }
 
-    // si se cierra, volvemos a plantAtributes con los datos que teniamos
-    override fun onDestroyView() {
-        super.onDestroyView()
-        val intent = Intent(requireActivity(), PlantAtributtes::class.java)
-        intent.putExtra("EXTRA_MODE", mode)
-        intent.putExtra("EXTRA_NAME", plant_name)
-        intent.putExtra("EXTRA_TYPE", plant_type)
-        intent.putExtra("EXTRA_BITMAP_FILE_NAME", bitmapFileName)
-        intent.putExtra("EXTRA_LOCATION_HOME", location_home)
-        startActivity(intent)
-    }
-
     fun updateResults(newText: String?) {
         adapter.filter.filter(newText)
     }
