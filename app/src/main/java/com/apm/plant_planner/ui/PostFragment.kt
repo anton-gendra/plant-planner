@@ -72,7 +72,7 @@ class PostFragment : Fragment() {
         val btnCancel = view.findViewById<Button>(R.id.button3)
         btnCancel.setBackgroundColor(0xFFFF0000.toInt())
         btnCancel.setOnClickListener {
-            val intent = Intent(activity, Maps::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
 
