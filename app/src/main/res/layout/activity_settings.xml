@@ -36,13 +36,6 @@
         android:orientation="vertical"
         android:gravity="center">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/theme_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:switchPadding="12sp"
-        android:text="@string/dark_mode" />
-
 
 
 
