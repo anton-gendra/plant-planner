@@ -77,8 +77,8 @@ class PlantAtributtes : AppCompatActivity() {
 
         if (mode == "edit") {
             // change textView title
-            findViewById<TextView>(R.id.textView).setText("Editar planta")
-            findViewById<Button>(R.id.button4).setText("Guardar cambios")
+            findViewById<TextView>(R.id.textView).setText(R.string.edit_plant)
+            findViewById<Button>(R.id.button4).setText(R.string.save_changes)
             old_plant_name = intent.getStringExtra("EXTRA_NAME")
             plant_type = intent.getStringExtra("EXTRA_TYPE")
             bitmapFileName = intent.getStringExtra("EXTRA_BITMAP_FILE_NAME")
@@ -89,8 +89,8 @@ class PlantAtributtes : AppCompatActivity() {
                 bitmap = BitmapFactory.decodeFile(file.absolutePath)
             }
         } else {
-            findViewById<TextView>(R.id.textView).setText("Añadir planta")
-            findViewById<Button>(R.id.button4).setText("Añadir planta")
+            findViewById<TextView>(R.id.textView).setText(R.string.add_plant)
+            findViewById<Button>(R.id.button4).setText(R.string.add_plant)
             bitmap = intent.getParcelableExtra("EXTRA_BITMAP") as Bitmap?
         }
 
@@ -139,17 +139,17 @@ class PlantAtributtes : AppCompatActivity() {
 
         val discardBtn: Button = findViewById(R.id.discard_btn)
         if (mode == "edit") {
-            discardBtn.setText("Eliminar planta")
+            discardBtn.setText(R.string.delete_plant)
             discardBtn.setBackgroundColor(0xFFFF0000.toInt())
             discardBtn.setOnClickListener{
                 val builder = AlertDialog.Builder(this)
-                builder.setMessage("Eliminar planta?")
+                builder.setMessage(R.string.delete_plant_message)
                     .setCancelable(false)
-                    .setPositiveButton("Sí") { _, _ ->
+                    .setPositiveButton(R.string.delete_plant_positive) { _, _ ->
                         deletePlant()
                         startActivity(Intent(this, MainActivity::class.java))
                     }
-                    .setNegativeButton("No") { dialog, _ ->
+                    .setNegativeButton(R.string.delete_plant_negative) { dialog, _ ->
                         // Dismiss the dialog
                         dialog.dismiss()
                     }

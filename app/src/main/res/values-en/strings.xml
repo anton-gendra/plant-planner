@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Plant-planner</string>
+    <string name="app_name">Plant Planner</string>
 
     <!-- Login activity -->
     <string name="user_label">User</string>
@@ -70,6 +70,13 @@
     <string name="frecuencia_de_riego">Watering frequency</string>
     <string name="change_photo">Change photo</string>
     <string name="location_home">Location at home*</string>
+    <string name="search_plant_type_atrib">Add plant type*</string>
+    <string name="delete_plant">Delete plant</string>
+    <string name="delete_plant_message">Are you sure you want to delete this plant?</string>
+    <string name="delete_plant_positive">Yes</string>
+    <string name="delete_plant_negative">No</string>
+    <string name="save_changes">Save changes</string>
+    <string name="edit_plant">Edit plant</string>
 
     <!-- Search plant activity -->
     <string name="buscador_de_especies">Species search</string>

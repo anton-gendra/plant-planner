@@ -30,7 +30,7 @@
     <!-- Empty inventory fragment -->
     <string name="inventory_empty">Tu inventario está vacio!</string>
     <string name="start_inventory">Comienza añadiendo una planta, bien buscándola en una lista o mediante la cámara de tu móvil.</string>
-    <string name="search_plant_type">Buscar planta</string>
+    <string name="search_plant_type">Buscar tipo planta</string>
 
     <!-- Camera fragment -->
     <string name="galeria">Galería</string>
@@ -70,6 +70,13 @@
     <string name="frecuencia_de_riego">Frecuencia de riego en días</string>
     <string name="change_photo">Cambiar foto</string>
     <string name="location_home">Ubicación en casa</string>
+    <string name="search_plant_type_atrib">Añadir especie*</string>
+    <string name="delete_plant">Eliminar planta</string>
+    <string name="delete_plant_message">¿Estás seguro de que quieres eliminar esta planta?</string>
+    <string name="delete_plant_positive">Sí</string>
+    <string name="delete_plant_negative">No</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="edit_plant">Editar planta</string>
 
     <!-- Search plant activity -->
     <string name="buscador_de_especies">Buscador de especies</string>
