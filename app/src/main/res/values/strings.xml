@@ -81,6 +81,7 @@
     <!-- Search plant activity -->
     <string name="buscador_de_especies">Buscador de especies</string>
     <string name="busca_aqui_especie">Busca aquí tu especie</string>
+    <string name="sin_resultados">Sin resultados</string>
 
     <!-- Calendar fragment -->
     <string name="no_events_today">¡No hay eventos para hoy! Descansa y mira tus plantas crecer.</string>
