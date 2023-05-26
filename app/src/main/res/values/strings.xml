@@ -64,7 +64,7 @@
 
     <!-- Plant attributes activity -->
     <string name="add_plant_button">Botón añadir planta</string>
-    <string name="add_plant">Añaadir planta</string>
+    <string name="add_plant">Añadir planta</string>
     <string name="discard_button">Botón descartar</string>
     <string name="ltimo_riego">Último riego</string>
     <string name="frecuencia_de_riego">Frecuencia de riego en días</string>
