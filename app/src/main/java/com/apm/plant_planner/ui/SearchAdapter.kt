@@ -71,7 +71,7 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
                             it.lowercase(Locale.ROOT).contains(searchText)
                         }
                         // create a list of SearchItem objects from the results list
-                        var listfiltered = mutableListOf<SearchItem>()
+                        val listfiltered = mutableListOf<SearchItem>()
                         for (i in 0 until results.size) {
                             // Add a new SearchItem object to listfiltered for each plant in results
                             if (i <= 2){
