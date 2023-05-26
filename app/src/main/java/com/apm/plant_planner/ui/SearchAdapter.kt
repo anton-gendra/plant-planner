@@ -1,4 +1,4 @@
-package com.apm.plant_planner.ui;
+package com.apm.plant_planner.ui
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -13,7 +13,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.apm.plant_planner.R
-import com.google.gson.Gson
 import java.util.Locale
 
 class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.Adapter<SearchViewHolder>(),
@@ -83,7 +82,6 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
                                     Method.GET, url,
                                     Response.Listener { response ->
                                         //println("Response is: $response")
-                                        val gson = Gson()
                                         //GET THE URL of the "thumbnail": "<URL to image>" field of the json
                                         response.toString().substringAfter("thumbnail\": \"").substringBefore("\"").let {
                                             println(it)
@@ -92,7 +90,6 @@ class SearchAdapter (private val originalList: List<SearchItem>) : RecyclerView.
                                     },
                                     Response.ErrorListener { error ->
                                         println(error.toString())
-                                        //Toast.makeText(requireContext(), "Error al realizar la petición", Toast.LENGTH_SHORT).show()
                                         println("Error al realizar la petición")
                                     }
                                 ) {

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.plant_planner.PlantAtributtes
@@ -18,10 +17,10 @@ class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SearchAdapter
 
-    var plant_name: String? = null
-    var plant_type: String? = null
+    var plantname: String? = null
+    var planttype: String? = null
     var bitmapFileName: String? = null
-    var location_home: PlantHomeLocation? = null
+    var locationhome: PlantHomeLocation? = null
     var mode: String? = null
 
 
@@ -30,10 +29,10 @@ class SearchFragment : Fragment() {
 
         val bundle = arguments
         if (bundle != null) {
-            plant_name = bundle.getString("plant_name")
-            plant_type = bundle.getString("plant_type")
+            plantname = bundle.getString("plant_name")
+            planttype = bundle.getString("plant_type")
             bitmapFileName = bundle.getString("bitmapFileName")
-            location_home = bundle.getSerializable("location_home") as PlantHomeLocation?
+            locationhome = bundle.getSerializable("location_home") as PlantHomeLocation?
             mode = bundle.getString("mode")
         }
     }
@@ -46,7 +45,7 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         // Inicializa el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
-        val myList = listOf<SearchItem>(
+        val myList = listOf(
             SearchItem("Sin resultados", "https://es.wikipedia.org/wiki/Ferocactus#/media/Archivo:Ferocactus_cylindraceus_1.jpg")
         )
         // Crea el adaptador personalizado y asígnalo al RecyclerView
@@ -55,18 +54,18 @@ class SearchFragment : Fragment() {
         adapter.setOnClickListener(object :
             SearchAdapter.OnClickListener {
             override fun onClick(position: Int, model: SearchItem) {
-                val new_plant_type = model.plantName
+                val newplanttype = model.plantName
                 val intent = Intent(requireActivity(), PlantAtributtes::class.java)
                 if (mode != null) {
-                    plant_type = new_plant_type
+                    planttype = newplanttype
                     intent.putExtra("EXTRA_MODE", mode)
-                    intent.putExtra("EXTRA_NAME", plant_name)
-                    intent.putExtra("EXTRA_TYPE", plant_type)
+                    intent.putExtra("EXTRA_NAME", plantname)
+                    intent.putExtra("EXTRA_TYPE", planttype)
                     intent.putExtra("EXTRA_BITMAP_FILE_NAME", bitmapFileName)
-                    intent.putExtra("EXTRA_LOCATION_HOME", location_home)
+                    intent.putExtra("EXTRA_LOCATION_HOME", locationhome)
                 } else {
                     intent.putExtra("EXTRA_MODE", "add")
-                    intent.putExtra("EXTRA_TYPE", new_plant_type)
+                    intent.putExtra("EXTRA_TYPE", newplanttype)
                 }
                 startActivity(intent)
             }
