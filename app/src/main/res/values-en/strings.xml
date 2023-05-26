@@ -77,4 +77,9 @@
     <string name="buscador_de_especies">Species search</string>
     <string name="busca_aqui_especie">Search here</string>
 
+    <!-- Calendar fragment -->
+    <string name="no_events_today">No events today! Rest and watch your plants grow.</string>
+    <string name="no_events_past">No events planned for %1$s day</string>
+    <string name="no_events_future">For day %1$s nothing planned</string>
+
 </resources>
