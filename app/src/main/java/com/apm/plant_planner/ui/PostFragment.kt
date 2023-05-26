@@ -30,11 +30,6 @@ import java.io.ByteArrayOutputStream
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PostFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PostFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -72,6 +67,13 @@ class PostFragment : Fragment() {
 
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_post, container, false)
+
+        val btnCancel = view.findViewById<Button>(R.id.button3)
+        btnCancel.setBackgroundColor(0xFFFF0000.toInt())
+        btnCancel.setOnClickListener {
+            val intent = Intent(activity, Maps::class.java)
+            startActivity(intent)
+        }
 
         val btnTakePhoto: Button? = view.findViewById(R.id.camaraPost)
         if (btnTakePhoto != null) {
