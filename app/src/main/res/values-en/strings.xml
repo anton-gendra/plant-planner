@@ -91,5 +91,6 @@
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="no_implementation">Not implemented yet</string>
+    <string name="reject">Reject</string>
 
 </resources>
