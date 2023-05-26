@@ -108,8 +108,12 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
 
     val request = object: StringRequest(
         Method.POST, url,
-        Response.Listener<String> { response ->
+         { response ->
             val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            with(sharedPreferences.edit()) {
+                putString("token", JSONObject(response).getString("access_token"))
+                apply()
+            }
             if (!sharedPreferences.contains("username")) {
                 with(sharedPreferences.edit()) {
                     putString("username", username)
@@ -119,11 +123,12 @@ fun sendLoginRequest(username: String?, password: String?, context: Context) {
             }
 
             Toast.makeText(context, "Login data: ".plus(response.toString()), Toast.LENGTH_SHORT).show()
+            sharedPreferences.edit().putInt("userid", JSONObject(response).getJSONObject("user").getInt("id")).apply()
 
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
         },
-        Response.ErrorListener { error ->
+        { error ->
             Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
         }
     ) {

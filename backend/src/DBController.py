@@ -26,14 +26,15 @@ class DBController:
         self.connection.commit()
 
 
-    def create_post(self, author_id):
+    def create_post(self, post):
         query = """
-            INSERT INTO post(author, likes)
-            VALUES (%s, %s) RETURNING id;
+            INSERT INTO post(title, location, image, author)
+            VALUES (%s, %s, %s, %s) RETURNING id;
         """
         with self.connection.cursor() as cur:
-            try: 
-                cur.execute(query, (author_id, 0))
+            try:
+                """cur.execute(query, (author_id, 0))"""
+                cur.execute(query, (post.title, post.location, post.image, post.author))
 
             except psycopg2.Error as e:
                 print(f"\033[91mError happened while inserting post:\033[0m\n\nQuery:\n{query}\n\n{e}")
@@ -59,6 +60,15 @@ class DBController:
 
         return self.execute_single_query_one_result(query, [user_name])
     
+
+    def get_user_by_id(self, userid):
+        query = """
+            SELECT id, name, password
+            FROM user_profile
+            WHERE id=%s;
+        """
+
+        return self.execute_single_query_one_result(query, [userid])
 
     def register_user(self, user):
         query = """
@@ -95,7 +105,15 @@ class DBController:
         """
 
         return self.execute_single_query_get_all(query, ())
-    
+
+    def get_all_posts(self):
+        query = """
+            SELECT *
+            FROM post
+            JOIN user_profile ON post.author = user_profile.id;
+        """
+
+        return self.execute_single_query_get_all(query, ())
 
     def remove_user(self, id):
         query = """
