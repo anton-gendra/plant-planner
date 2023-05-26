@@ -42,15 +42,6 @@ class Settings : AppCompatActivity() {
             }
         }
 
-        val switchDarkMode: SwitchCompat = findViewById(R.id.theme_switch)
-        switchDarkMode.setOnClickListener {
-            if (switchDarkMode.isChecked) {
-                Toast.makeText(this, "Dark mode activated", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Dark mode deactivated", Toast.LENGTH_SHORT).show()
-            }
-        }
-
         val lightBtn: RadioButton = findViewById(R.id.light_theme)
         val light2Btn: RadioButton = findViewById(R.id.light_theme_2)
         val darkBtn: RadioButton = findViewById(R.id.dark_theme)
