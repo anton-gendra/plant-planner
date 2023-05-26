@@ -153,6 +153,10 @@ class PostFragment : Fragment() {
 
             queue.add(request)
 
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.postLayout, SocialFragment())
+            transaction.commit()
+
         }
 
         //AQUI COJO EL BASE64 DE LA BD Y MUESTRA LA IMAGEN EN EL OBJ XML DE IMAGEVIEW

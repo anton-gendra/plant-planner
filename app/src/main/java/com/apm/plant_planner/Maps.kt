@@ -94,7 +94,7 @@ class Maps : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButt
                 val location = LatLng(latlng.latitude,latlng.longitude)
                 map.addMarker(MarkerOptions()
                         .snippet(latlng.latitude.toString()+ " : " + latlng.longitude)
-                        .title("Planta")
+                        .title("Localization")
                         .position(location))
             }
         })
